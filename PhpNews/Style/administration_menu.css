@@ -1,0 +1,17 @@
+body{
+    font-family: sans-serif;
+}
+
+.menu{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 15px;
+}
+
+.menu ul{
+    display: flex;
+    flex-direction: column;
+}
+
+.selected{
+    background-color: #b6c2d9;
+}

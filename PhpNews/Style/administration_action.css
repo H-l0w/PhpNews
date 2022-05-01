@@ -1,0 +1,96 @@
+body{
+    font-family: sans-serif;
+}
+
+.menu_form{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    gap: 25px;
+}
+
+.title h2{
+    text-align: center;
+    margin: 0;
+}
+.main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.form_div{
+    padding: 15px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    font-size: 150%;
+    height: 40px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+}
+
+textarea{
+    font-size: 150%;
+    margin-bottom: 25px;
+    resize: none;
+    border-radius: 5px;
+    border: solid 2px;
+}
+
+button{
+    border-radius: 5px;
+    height: 50px;
+    font-size: 150%;
+}
+
+select{
+    border: solid 2px;
+    border-radius: 5px;
+    height: 50px;
+    font-size: 150%;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+input[type=checkbox] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+    size: 40px;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
+label {
+    display: block;
+}
+
+
+input[type='datetime-local']{
+    text-align: center;
+}
+
+#article_category{
+    margin-top: 25px;
+}
+
+label{
+    font-size: 150%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+a{
+    text-decoration: none;
+    color: #155dee;
+}

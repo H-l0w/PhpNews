@@ -1,0 +1,61 @@
+a{
+    text-decoration: none;
+    color: #155dee;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.categories{
+    padding: 25px;
+    display: flex;
+    column-gap: 83px;
+    row-gap: 50px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow:hidden;
+}
+
+.category{
+    position: relative;
+    width: 250px;
+    margin-bottom:-4px;
+    margin-top:1px; /*to rectify the bottom margin, we can also consider padding-bottom*/
+    border-bottom: solid 4px #155dee;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+.category:hover{
+    transform: scale(1.1);
+}
+
+img{
+    width: 248px;
+    height: 170px;
+    border: solid 1px black;
+}
+
+.name{
+    display: flex;
+    justify-content: center;
+}
+
+.content p {
+    text-align: center;
+    margin: 5px;
+}
+
+.category h2{
+    margin: 0;
+}
+
+.administration{
+    margin-top: 0;
+}
+
+.administration h1{
+    margin-top: 0;
+    padding-top: 5px;
+    border-top: solid 4px #155dee;
+    display: flex;
+    justify-content: center;
+}
