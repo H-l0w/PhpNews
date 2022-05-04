@@ -10,11 +10,10 @@ class ArticleRepo
     }
 
     public function getArticles(){
-        $sql = 'SELECT a.*, c.name as name,c.id as id_category, au.name as a_name, au.surname as a_surname FROM articles a 
-                INNER JOIN categories c on a.id_category = c.id
+        $sql = 'SELECT a.*, au.name as a_name, au.surname as a_surname FROM articles a 
                 INNER JOIN users au on a.id_author = au.id
                 WHERE a.visible = 1
-                ORDER BY a.date DESC limit 9';
+                ORDER BY a.date DESC limit 10';
         return $this->db->select($sql);
     }
 
@@ -36,8 +35,7 @@ class ArticleRepo
     }
 
     public function getArticle($id){
-        $sql = 'SELECT a.*, c.name as name, au.name as a_name, au.surname as a_surname FROM articles a 
-                INNER JOIN categories c on a.id_category = c.id
+        $sql = 'SELECT a.*, au.name as a_name, au.surname as a_surname FROM articles a 
                 INNER JOIN users au on a.id_author = au.id
                 WHERE a.id = :id';
         return $this->db->selectOne($sql, ['id' => $id]);
@@ -60,8 +58,7 @@ class ArticleRepo
     }
 
     public function getAllArticles(){
-        $sql = 'SELECT a.*, c.name as name,c.id as id_category, au.name as a_name, au.surname as a_surname FROM articles a 
-                INNER JOIN categories c on a.id_category = c.id
+        $sql = 'SELECT a.*,au.name as a_name, au.surname as a_surname FROM articles a 
                 INNER JOIN users au on a.id_author = au.id
                 ORDER BY a.date DESC';
         return $this->db->select($sql);

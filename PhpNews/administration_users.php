@@ -50,11 +50,13 @@ require_once 'nav_bar.php';
                         <td><p><?= $user['name'] ?></p></td>
                         <td><p><?= $user['surname'] ?></p></td>
                         <td><p><?= $user["role_description"] ?></p></td>
-                        <td><a href="<?= $user['image_url'] ?>">zobrazit obrázek</a></td>
-                        <?php if(LoginService::IsAdministrator()) :?>
+                        <td><a href="<?=$user['image_path']?>">zobrazit obrázek</a></td>
+                        <?php if(LoginService::IsAdministrator()):?>
                             <td>
                                 <div class="action">
-                                    <a class="delete" href="delete_user.php?id=<?= $user['id'] ?>">Smazat</a>
+                                    <?php if ($user['id'] !== $_SESSION['id']): ?>
+                                        <a class="delete" href="delete_user.php?id=<?= $user['id'] ?>">Smazat</a>
+                                    <?php endif;?>
                                     <a href="update_user.php?id=<?= $user['id'] ?>">Upravit</a>
                                 </div>
                             </td>

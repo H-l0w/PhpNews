@@ -34,9 +34,8 @@ class CategoryRepo
         return $this->db->selectOne($sql, ['id' => $id]);
     }
 
-    public function getNumArticlesForCategory($id){
-        $sql = 'SELECT COUNT(0) as count FROM articles where id_category = :id';
-        return $this->db->selectOne($sql, ['id' => $id]);
+    public function canBeDeleted($id){
+        $sql = 'SELECT count(0) FROM category_assigns WHERE id_category = :id';
+        return $this->db->selectOne($sql, ['id'=> $id]);
     }
-
 }

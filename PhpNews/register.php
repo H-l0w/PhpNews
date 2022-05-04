@@ -42,39 +42,46 @@
 include 'nav_bar.php';
 require_once 'Model/LoginRepo.php';
 require_once 'Model/Database.php';
+require_once 'Model/ImageRepo.php';
 
-if(isset($_POST['name'], $_POST['surname'], $_POST['username'], $_POST['email'], $_POST['password'], $_POST['image_url'], $_POST['description'])){
+if(isset($_POST['name'], $_POST['surname'], $_POST['username'], $_POST['email'], $_POST['password'], $_POST['description'])){
 
     $db = new Database();
     $repo = new LoginRepo($db);
+    $userRepo = new UserRepo($db);
+    $image_repo = new ImageRepo($db);
 
-    if($repo->usernameExists($_POST['username']))
+    if($userRepo->usernameExists($_POST['username']))
     {
-        header('Location: register.php?error=username_exists');
+        header('Location: register.php?error=user_exists');
         die();
     }
-    else if ($repo->emailExists($_POST['email'])){
-        header('Location: register.php?error=email_exists');
+    else if ($userRepo->emailExists($_POST['email'])){
+        header('Location: register.php?error=user_exists');
         die();
     }
     else{
         //not exists -> can be added
+        $res = $image_repo->addImage($_FILES, 'profile_image', $_POST['username'], null);
+        if ($res === -1){
+            header('Location: register.php?error=upload_fail');
+            die();
+        }
+
         $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $repo->register(['name' => $_POST['name'], 'surname' => $_POST['surname'],
             'username' => $_POST['username'], 'email' => $_POST['email'],
             'password' => $pass,
-            'image_url' => $_POST['image_url'], 'description' => $_POST['description']]);
+            'id_image' => $res, 'description' => $_POST['description']]);
         $login = $repo->login($_POST['username'], $pass);
         $_SESSION = $login;
         $_SESSION['is_logged'] = true;
         header('Location: index.php');
         die();
     }
-
-
 }
 ?>
-<div class="form_div" style="margin: 0 auto 0">
+<div class="form_div" id="register" style="margin: 0 auto 0">
     <div class="title">
         <h1>Registrace</h1>
     </div>
@@ -82,23 +89,23 @@ if(isset($_POST['name'], $_POST['surname'], $_POST['username'], $_POST['email'],
         <div class="error_message">
             <h3 id="e">
                 <?php if(isset($_GET['error'])): ?>
-                    <?php if($_GET['error'] === 'username_exists'): ?>
-                        Zadný uživatel je již registrován
-                    <?php elseif ($_GET['error'] === 'email_exists'): ?>
-                        Zadaný email je již registrován
+                    <?php if($_GET['error'] === 'user_exists'): ?>
+                        Zadaný uživatel již existuje
+                    <?php elseif($_GET['error'] === 'upload_fail'): ?>
+                        Chyba při nahrávání obrázku
                     <?php endif;?>
                 <?php endif;?>
             </h3>
         </div>
     </div>
-    <form action="" method="post"">
+    <form action="" method="post" enctype="multipart/form-data">
         <input type="text" placeholder="Jméno" name="name" required id="name">
         <input type="text" placeholder="Příjímení" required name="surname">
         <input type="text" placeholder="Uživatelské jméno" required name="username">
         <input type="email" placeholder="Email" required name="email">
-        <input placeholder="Heslo" type="password" name="password" id="pass">
-        <input placeholder="Potvrdit heslo" type="password" id="pass_check">
-        <input type="text" placeholder="Url obrázku" required name="image_url">
+        <input placeholder="Heslo" type="password" name="password" id="pass" required>
+        <input placeholder="Potvrdit heslo" type="password" id="pass_check" required>
+        <input type="file" name="profile_image" id="profile_image" accept=".png, .jpg, .jpeg" required>
         <textarea name="description" id="" cols="30" rows="10" placeholder="Popisek uživatele" required></textarea>
 
         <button type="submit">Registrovat</button>

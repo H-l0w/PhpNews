@@ -1,4 +1,16 @@
 <?php
+
+function refreshSession($id_role_){
+    if($_SESSION['id'] === $_GET['id']){
+        $_SESSION['name'] = $_POST['name'];
+        $_SESSION['surname'] = $_POST['surname'];
+        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['role'] = $id_role_ === '1' ? "Administrator" : 'Editor';
+        $_SESSION['role_id'] = $id_role_;
+        $_SESSION['email'] = $_POST['email'];
+    }
+}
+
 require_once 'nav_bar.php';
 require_once 'Model/LoginService.php';
 if(!isset($_GET['id'])){
@@ -23,7 +35,7 @@ $user = $repo->getAuthor($_GET['id']);
 
 if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
     $_POST['email'],$_POST['password'],
-    $_POST['image_url'] ,$_POST['description']))
+    $_POST['description']))
 {
     require_once 'Model/Database.php';
     require_once 'Model/UserRepo.php';
@@ -31,33 +43,42 @@ if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
     $id_role = $_POST['id_role'] ?? $_SESSION['role_id'];
 
     $repo = new UserRepo($db);
-    if (empty($_POST['password'])){
+    if (empty($_POST['password']) && empty($_FILES)){
+        //without password and image
+        $repo->updateWithoutPasswordAndImage(['id' => $_POST['id'],'name' => $_POST['name'], 'surname' => $_POST['surname'],
+            'username' => $_POST['username'], 'email' => $_POST['email'],
+            'id_role' => $id_role, 'description' => $_POST['description']]);
+        refreshSession($id_role);
+        header('Location: administration_users.php');
+        die();
+    }
+    else if (empty($_POST['password'])){
         $repo->updateWithoutPassword(['id' => $_POST['id'],'name' => $_POST['name'], 'surname' => $_POST['surname'],
             'username' => $_POST['username'], 'email' => $_POST['email'],
             'id_role' => $id_role,
             'image_url' => $_POST['image_url'], 'description' => $_POST['description']]);
+        refreshSession($id_role);
+        header('Location: administration_users.php');
+        die();
+    }
+    else if (empty($_FILES)){
+        $repo->updateWithoutImage(['id' => $_POST['id'],'name' => $_POST['name'], 'surname' => $_POST['surname'],
+            'username' => $_POST['username'], 'email' => $_POST['email'],
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'id_role' => $id_role,
+            'description' => $_POST['description']]);
+        refreshSession($id_role);
+        header('Location: administration_users.php');
+        die();
     }
     else{
         $repo->updateAuthor(['id' => $_POST['id'],'name' => $_POST['name'], 'surname' => $_POST['surname'],
             'username' => $_POST['username'], 'email' => $_POST['email'],
             'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'id_role' => $id_role,
             'image_url' => $_POST['image_url'], 'description' => $_POST['description']]);
+        refreshSession($id_role);
+        header('Location: administration_users.php');
+        die();
     }
-
-    //refreshing only when user updates his profile
-    if($_SESSION['id'] === $_GET['id']){
-        var_dump('session_refresh');
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['surname'] = $_POST['surname'];
-        $_SESSION['username'] = $_POST['username'];
-        $_SESSION['role'] = $id_role === '1' ? "Administrator" : 'Editor';
-        $_SESSION['role_id'] = $id_role;
-        $_SESSION['image_url'] = $_POST['image_url'];
-        $_SESSION['email'] = $_POST['email'];
-    }
-
-    header('Location: administration_users.php');
-    die();
 }
 ?>
 <!doctype html>
@@ -78,7 +99,7 @@ if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
             <div class="title">
                 <h2>Upravit uživatele - <?= $user['name']. ' '. $user['surname'] ?></h2>
             </div>
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
                 <input required="required" type="text" name="name" placeholder="Jméno" value="<?= $user['name'] ?>">
                 <input required="required" type="text" name="surname" placeholder="Přijímení" value=<?= $user['surname'] ?>>
@@ -93,7 +114,7 @@ if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
                     </select>
                 <?php endif; ?>
                 <textarea required="required" name="description" id="" cols="30" rows="10" placeholder="Popis uživatele"><?= $user['description']?></textarea>
-                <input required="required" type="text" name="image_url" placeholder="Url obrázku" value="<?= $user['image_url'] ?>">
+                <input type="file" name="profile_image">
                 <button type="submit">Upravit uživatele</button>
             </form>
         </div>
