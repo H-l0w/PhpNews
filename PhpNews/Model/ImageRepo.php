@@ -16,20 +16,34 @@ class ImageRepo
 
     private function addImageToDatabaseDescription($name, $description){
         $sql = 'INSERT INTO images values (default, :name, :description, :path)';
-        return $this->db->insert($sql, ['name' => $name, 'description' => $description]);
+        return $this->db->insert($sql, ['name' => $name, 'description' => $description, 'path' => 'Images/'.$name]);
+    }
+
+    public function getImages(){
+        $sql = 'SELECT * FROM images';
+        return $this->db->select($sql);
     }
 
     public function addImage($files, $imageNameInFiles, $imageNameToStore, $description){
         $target_dir = "Images/";
         $extension = strtolower(pathinfo($files[$imageNameInFiles]['name'],PATHINFO_EXTENSION));
-        $target_file = $target_dir .$imageNameToStore.'.'.$extension;
+
+        $target_file = "";
+        if (str_contains($imageNameToStore, '.png') || str_contains($imageNameToStore, '.jpg') || str_contains($imageNameToStore, '.jpeg')){
+            $target_file = $target_dir .$imageNameToStore;
+        }
+        else{
+            $target_file = $target_dir .$imageNameToStore.'.'.$extension;
+        }
 
         $check = getimagesize($files[$imageNameInFiles]["tmp_name"]);
         if($check === false) {
+            var_dump('check');
             return -1;
         }
 
         if (file_exists($target_file)) {
+            var_dump('exists');
             return -1;
         }
 
@@ -41,15 +55,25 @@ class ImageRepo
             return -1;
         }
 
-        if (!move_uploaded_file($files["profile_image"]["tmp_name"], $target_file)){
+        if (!move_uploaded_file($files["$imageNameInFiles"]["tmp_name"], $target_file)){
             return -1;
         }
 
         if (isset($description, $imageNameInFiles, $imageNameToStore)){
-            return $this->addImageToDatabaseDescription($imageNameToStore.'.'.$extension, $description);
+            if (str_contains($imageNameToStore, '.png') || str_contains($imageNameToStore, '.jpg') || str_contains($imageNameToStore, '.jpeg')){
+                return $this->addImageToDatabaseDescription($imageNameToStore, $description);
+            }
+            else{
+                return $this->addImageToDatabaseDescription($imageNameToStore.'.'.$extension, $description);
+            }
         }
         else{
-            return $this->addImageToDatabase($imageNameToStore.'.'.$extension);
+            if (str_contains($imageNameToStore, '.png') || str_contains($imageNameToStore, '.jpg') || str_contains($imageNameToStore, '.jpeg')){
+                return $this->addImageToDatabase($imageNameToStore);
+            }
+            else{
+                return $this->addImageToDatabase($imageNameToStore.'.'.$extension);
+            }
         }
     }
 }

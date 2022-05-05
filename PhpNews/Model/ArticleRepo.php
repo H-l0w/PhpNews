@@ -42,8 +42,7 @@ class ArticleRepo
     }
 
     public function getArticlesByAuthor($id){
-        $sql = 'SELECT a.*, c.name as name, au.name as a_name, au.surname as a_surname FROM articles a 
-                INNER JOIN categories c on a.id_category = c.id
+        $sql = 'SELECT a.*, au.name as a_name, au.surname as a_surname FROM articles a 
                 INNER JOIN users au on a.id_author = au.id
                 WHERE a.id_author = :id';
         return $this->db->selectWithParams($sql, ['id' => $id]);

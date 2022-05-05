@@ -27,6 +27,7 @@ require_once 'Model/LoginService.php'
         <li class="<?= str_contains($page, 'categories')  || str_contains($page, 'category')? 'selected' : '' ?>"><a href="administration_categories.php">Kategorie</a></li>
         <li class="<?= str_contains($page, 'users') || str_contains($page, 'user') ? 'selected' : '' ?>"><a href="administration_users.php">Uživatelé</a></li>
         <!-- <li class="<?= str_contains($page, 'roles') || str_contains($page, 'role') ? 'selected' : '' ?>"><a href="administration_roles.php">Role</a></li> -->
+        <li class="<?= str_contains($page, 'gallery') || str_contains($page, 'gallery') ? 'selected' : '' ?>"><a href="administration_gallery.php">Galerie</a></li>
         <li class="<?= str_contains($page, 'comments') || str_contains($page, 'comment') ? 'selected' : '' ?>"><a href="administration_comments.php">Komentáře</a></li>
     </ul>
 </div>

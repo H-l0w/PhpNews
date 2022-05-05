@@ -43,6 +43,7 @@ include 'nav_bar.php';
 require_once 'Model/LoginRepo.php';
 require_once 'Model/Database.php';
 require_once 'Model/ImageRepo.php';
+require_once 'Model/UserRepo.php';
 
 if(isset($_POST['name'], $_POST['surname'], $_POST['username'], $_POST['email'], $_POST['password'], $_POST['description'])){
 
