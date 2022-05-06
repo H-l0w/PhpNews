@@ -44,7 +44,7 @@ require_once 'nav_bar.php';
                         <td><p><?= $category['id'] ?></p></td>
                         <td><p><?= $category['name'] ?></p></td>
                         <td><p><?= $category['description'] ?></p></td>
-                        <td><a href="<?= $category['image_url'] ?>">Zobrazit obrázek</a></td>
+                        <td><a href="<?= $category['path'] ?>">Zobrazit obrázek</a></td>
                         <?php if(LoginService::IsAdministrator()):?>
                         <td>
                             <div class="action">

@@ -12,8 +12,8 @@ $db = new Database();
 $repo = new CategoryRepo($db);
 $category = [];
 
-if (isset($_POST['id'], $_POST['name'], $_POST['description'], $_POST['image_url'])){
-    $repo->updateCategory(['id' => $_POST['id'],'name' => $_POST['name'],'description' => $_POST['description'],'image_url' => $_POST['image_url']]);
+if (isset($_POST['id'], $_POST['name'], $_POST['description'], $_POST['image'])){
+    $repo->updateCategory(['id' => $_POST['id'],'name' => $_POST['name'],'description' => $_POST['description'],'id_image' => $_POST['image']]);
     header('Location: administration_categories.php');
     die();
 }
@@ -44,7 +44,7 @@ else if(isset($_GET['id'])){
                 <input name="id" type="hidden" value="<?= $_GET['id'] ?>">
                 <input value="<?= $category['name'] ?>" type="text" name="name" required="required" placeholder="Jméno kategorie">
                 <textarea required="required" name="description" id="description" cols="30" rows="10" placeholder="Popisek kategorie"><?= $category['description'] ?></textarea>
-                <input value="<?= $category['image_url'] ?>" type="text" name="image_url" required="required" placeholder="Url obrázku">
+                <?php require_once 'image_picker.php';?>
                 <button type="submit">Upravit kategorii</button>
             </form>
         </div>

@@ -19,7 +19,7 @@ $roles = $repo->getRoles();
 
 if (isset($_POST['name'],$_POST['surname'], $_POST['username'],
           $_POST['email'],$_POST['password'], $_POST['id_role'],
-          $_POST['description']))
+          $_POST['description'], $_POST['image']))
 {
     $repo = new UserRepo($db);
     if ($repo->emailExists($_POST['email']) || $repo->usernameExists($_POST['username'])){
@@ -28,18 +28,11 @@ if (isset($_POST['name'],$_POST['surname'], $_POST['username'],
     }
 
     require_once 'Model/Database.php';
-    $imageRepo = new ImageRepo($db);
-    $res = $imageRepo->addImage($_FILES, 'profile_image', $_POST['username'], null);
-
-    if ($res === -1){
-        header('Location: administration_users.php?error=upload_fail');
-        die();
-    }
 
     $repo->addAuthor(['name' => $_POST['name'], 'surname' => $_POST['surname'],
         'username' => $_POST['username'], 'email' => $_POST['email'],
         'password' => hash('sha256', $_POST['password']), 'id_role' => $_POST['id_role'],
-        'id_image' => $res, 'description' => $_POST['description']]);
+        'id_image' => $_POST['image'], 'description' => $_POST['description']]);
     header('Location: administration_users.php');
     die();
 }
@@ -60,7 +53,7 @@ if (isset($_POST['name'],$_POST['surname'], $_POST['username'],
     <?php require_once 'administration_menu.php' ?>
     <div class="main">
         <div class="error">
-            <?php if( $_GET['error'] === 'upload_fail'): ?>
+            <?php if(isset($_GET['error']) && $_GET['error'] === 'upload_fail'): ?>
                 Chyba při nahrávání obrázku
             <?php endif;?>
         </div>
@@ -73,7 +66,7 @@ if (isset($_POST['name'],$_POST['surname'], $_POST['username'],
                 <input required="required" type="text" name="surname" placeholder="Přijímení">
                 <input required="required" type="text" name="username" placeholder="Uživatelské jméno">
                 <input required="required" type="email" name="email" placeholder="Email">
-                <input required="required" type="text" name="password" placeholder="Heslo">
+                <input required="required" type="password" name="password" placeholder="Heslo">
                 <select required="required" name="id_role" id="role">
                     <option value="" disabled="disabled">Vyberte uživatelskou roli</option>
                     <?php foreach($roles as $role): ?>
@@ -81,7 +74,7 @@ if (isset($_POST['name'],$_POST['surname'], $_POST['username'],
                     <?php endforeach; ?>
                 </select>
                 <textarea required="required" name="description" id="" cols="30" rows="10" placeholder="Popis uživatele"></textarea>
-                <input type="file" required name="profile_image">
+                <?php require_once 'image_picker.php'?>
                 <button type="submit">Přidat uživatele</button>
             </form>
         </div>

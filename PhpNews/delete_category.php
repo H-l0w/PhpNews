@@ -1,6 +1,5 @@
 <?php
     session_start();
-    var_dump($_SESSION);
     if(!isset($_GET['id'])){
         header('Location: administration_articles.php');
         die();

@@ -95,6 +95,7 @@ a{
 }
 
 .images_list{
+    margin-left: 5px;
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -102,14 +103,14 @@ a{
 }
 
 .image img{
-    width: 250px;
-    height: 200px;
+    width: 300px;
+    height: 250px;
 }
 
 .image{
     text-align: center;
-    width: 250px;
-    height: 200px;
+    width: 310px;
+    height: 250px;
     margin-bottom: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     padding: 5px;
@@ -117,7 +118,7 @@ a{
 }
 
 .image p{
-    margin-bottom: 0;
+    margin-bottom: 0px;
     margin-top: 5px;
 }
 
@@ -125,8 +126,8 @@ form{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 250px;
-    height: 200px;
+    width: 300px;
+    height: 250px;
 }
 
 input{

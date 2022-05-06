@@ -33,6 +33,9 @@ foreach($pages as $page){
         break;
     }
 }
+
+if (str_contains($actual_link, 'administration'))
+    $selected = 'administration_articles.php';
 ?>
 <div class="nav_bar">
     <ul>

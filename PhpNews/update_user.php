@@ -35,7 +35,7 @@ $user = $repo->getAuthor($_GET['id']);
 
 if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
     $_POST['email'],$_POST['password'],
-    $_POST['description']))
+    $_POST['description'], $_POST['image']))
 {
     require_once 'Model/Database.php';
     require_once 'Model/UserRepo.php';
@@ -43,42 +43,21 @@ if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
     $id_role = $_POST['id_role'] ?? $_SESSION['role_id'];
 
     $repo = new UserRepo($db);
-    if (empty($_POST['password']) && empty($_FILES)){
-        //without password and image
-        $repo->updateWithoutPasswordAndImage(['id' => $_POST['id'],'name' => $_POST['name'], 'surname' => $_POST['surname'],
-            'username' => $_POST['username'], 'email' => $_POST['email'],
-            'id_role' => $id_role, 'description' => $_POST['description']]);
-        refreshSession($id_role);
-        header('Location: administration_users.php');
-        die();
-    }
-    else if (empty($_POST['password'])){
+    if(empty($_POST['password'])){
         $repo->updateWithoutPassword(['id' => $_POST['id'],'name' => $_POST['name'], 'surname' => $_POST['surname'],
             'username' => $_POST['username'], 'email' => $_POST['email'],
             'id_role' => $id_role,
-            'image_url' => $_POST['image_url'], 'description' => $_POST['description']]);
-        refreshSession($id_role);
-        header('Location: administration_users.php');
-        die();
-    }
-    else if (empty($_FILES)){
-        $repo->updateWithoutImage(['id' => $_POST['id'],'name' => $_POST['name'], 'surname' => $_POST['surname'],
-            'username' => $_POST['username'], 'email' => $_POST['email'],
-            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'id_role' => $id_role,
-            'description' => $_POST['description']]);
-        refreshSession($id_role);
-        header('Location: administration_users.php');
-        die();
+            'id_image' => $_POST['image'], 'description' => $_POST['description']]);
     }
     else{
         $repo->updateAuthor(['id' => $_POST['id'],'name' => $_POST['name'], 'surname' => $_POST['surname'],
             'username' => $_POST['username'], 'email' => $_POST['email'],
             'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'id_role' => $id_role,
-            'image_url' => $_POST['image_url'], 'description' => $_POST['description']]);
-        refreshSession($id_role);
-        header('Location: administration_users.php');
-        die();
+            'id_image' => $_POST['image'], 'description' => $_POST['description']]);
     }
+    refreshSession($id_role);
+    header('Location: administration_users.php');
+    die();
 }
 ?>
 <!doctype html>
@@ -114,7 +93,7 @@ if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
                     </select>
                 <?php endif; ?>
                 <textarea required="required" name="description" id="" cols="30" rows="10" placeholder="Popis uživatele"><?= $user['description']?></textarea>
-                <input type="file" name="profile_image">
+                <?php require_once 'image_picker.php'?>
                 <button type="submit">Upravit uživatele</button>
             </form>
         </div>

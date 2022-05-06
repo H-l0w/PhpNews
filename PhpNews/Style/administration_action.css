@@ -47,6 +47,7 @@ textarea{
 
 button{
     border-radius: 5px;
+    margin-bottom: 10px;
     height: 50px;
     font-size: 150%;
 }
@@ -93,4 +94,44 @@ label{
 a{
     text-decoration: none;
     color: #155dee;
+}
+
+.gallery{
+    display: none;
+}
+
+.images{
+    height: 200px;
+    overflow: auto;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    border: 2px black solid;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+form .images img{
+    width: 228px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+/* HIDE RADIO */
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+    cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+    border: 2px solid red;
 }

@@ -5,17 +5,20 @@ if(!LoginService::IsAdministrator()){
     header('Location: index.php');
     die();
 }
+require_once 'Model/Database.php';
+$db = new Database();
 
-if (isset($_POST['name'], $_POST['description'], $_POST['image_url']))
+if (isset($_POST['name'], $_POST['description'], $_POST['image']))
 {
-    require_once 'Model/Database.php';
     require_once 'Model/CategoryRepo.php';
-    $db = new Database();
     $repo = new CategoryRepo($db);
-    $repo->addCategory(['name' => $_POST['name'], 'description' => $_POST['description'], 'image_url' => $_POST['image_url']]);
+    $repo->addCategory(['name' => $_POST['name'], 'description' => $_POST['description'], 'id_image' => $_POST['image']]);
     header('Location: administration_categories.php');
     die();
 }
+require_once 'Model/ImageRepo.php';
+$imageRepo = new ImageRepo($db);
+$images = $imageRepo->getImages();
 ?>
 <!doctype html>
 <html lang="en">
@@ -38,11 +41,12 @@ if (isset($_POST['name'], $_POST['description'], $_POST['image_url']))
             <form action="" method="post">
                 <input required="required" type="text" name="name" placeholder="Jméno kategorie">
                 <textarea required="required" name="description" id="description" cols="30" rows="10" placeholder="Popisek kategorie"></textarea>
-                <input required="required" type="text" name="image_url" placeholder="Url obrázku kategorie">
+                <?php require_once 'image_picker.php';?>
                 <button type="submit">Přidat kategorii</button>
             </form>
         </div>
     </div>
 </div>
+<script src="Scripts/gallery.js"></script>
 </body>
 </html>

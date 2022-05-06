@@ -71,7 +71,9 @@ $images = $repo->getImages();
             </div>
             <?php foreach ($images as $image): ?>
                 <div class="image">
-                    <img src="<?=$image['path']?>" alt="<?=$image['name']?>">
+                    <a href="<?=$image['path']?>" target="_blank">
+                        <img src="<?=$image['path']?>" alt="<?=$image['name']?>">
+                    </a>
                     <p><?=$image['name']?></p>
                 </div>
             <?php endforeach; ?>

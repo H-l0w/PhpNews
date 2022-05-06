@@ -39,26 +39,11 @@ class UserRepo
 
     public function updateWithoutPassword($params = []){
         $sql = 'UPDATE users set name = :name, surname = :surname, username = :username, email = :email,
-                 id_role = :id_role, id_iamge = :id_image,
+                 id_role = :id_role, id_image = :id_image,
                  description = :description where id = :id';
 
         $this->db->update($sql, $params);
     }
-
-    public function updateWithoutImage($params = []){
-        $sql = 'UPDATE users set name = :name, surname = :surname, username = :username, email = :email,
-                 id_role = :id_role, description = :description where id = :id, password = :password';
-
-        $this->db->update($sql, $params);
-    }
-
-    public function updateWithoutPasswordAndImage($params = []){
-        $sql = 'UPDATE users set name = :name, surname = :surname, username = :username, email = :email,
-                 id_role = :id_role, description = :description where id = :id';
-
-        $this->db->update($sql, $params);
-    }
-
 
     public function getArticlesByAuthor($id){
         $sql = 'SELECT * as count FROM articles a where a.id_author = :id';
@@ -66,7 +51,8 @@ class UserRepo
     }
 
     public function getAuthor($id){
-        $sql = 'SELECT * FROM users where id = :id';
+        $sql = 'SELECT u.*, i.path FROM users u INNER JOIN images i on i.id = u.id_image
+                where u.id = :id';
         return $this->db->selectOne($sql, ['id' => $id]);
     }
 
