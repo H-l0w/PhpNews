@@ -7,8 +7,12 @@ if(!LoginService::IsCreator() && !LoginService::IsAdministrator()){
 }
 require_once 'Model/Database.php';
 $db = new Database();
-if (isset($_POST['date'],$_POST['id_category'], $_POST['title'], $_POST['text'], $_POST['image_url'])){
+
+if (isset($_POST['date'], $_POST['title'], $_POST['text'], $_POST['image'])){
     require_once 'Model/ArticleRepo.php';
+    require_once 'Model/CategoryRepo.php';
+    if(empty($_POST['date']))
+        $_POST['date'] = date("Y-m-d H:i:s");
 
     $visible = 0;
     if (isset($_POST['visible']))
@@ -18,15 +22,23 @@ if (isset($_POST['date'],$_POST['id_category'], $_POST['title'], $_POST['text'],
 
     $repo = new ArticleRepo($db);
     $visible = $_POST['visible'] == 'visible' ? 1 : 0;
-    $repo->addArticle(['date' => $_POST['date'],'id_author' => $id_author, 'id_category' => $_POST['id_category'],
-                       'title' => $_POST['title'], 'text' => $_POST['text'], 'visible' => $visible, 'image_url' => $_POST['image_url']]);
+
+    $categoryRepo = new CategoryRepo($db);
+
+    $idArticle = $repo->addArticle(['date' => $_POST['date'],'id_author' => $id_author, 'title' => $_POST['title'],
+                       'text' => $_POST['text'], 'visible' => $visible, 'id_image' => $_POST['image']]);
+
+    foreach ($_POST as $key => $item){
+        if(str_contains($key, 'category')){
+            $categoryRepo->assignArticleToCategory($idArticle, $item);
+        }
+    }
     header('Location: administration_articles.php');
     die();
 }
 require_once 'Model/CategoryRepo.php';
 require_once 'Model/UserRepo.php';
 $repo = new CategoryRepo($db);
-$categories = $repo->getCategories();
 $repo = new UserRepo($db);
 $users = $repo->getAuthors();
 ?>
@@ -59,12 +71,7 @@ $users = $repo->getAuthors();
             <form action="" method="post">
                 <input type="text" name="title" required placeholder="Titulek článku" maxlength="75">
                 <textarea style="height: 700px" class="article_content" name="text" id="article_content" cols="30" rows="10" placeholder="Text článku"></textarea>
-                <select name="id_category" id="article_category" required>
-                    <option value="" disabled selected>Vyberte kategorii</option>
-                    <?php foreach($categories as $category): ?>
-                        <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <?php require_once 'category_picker.php';?>
                 <?php if(LoginService::IsAdministrator()): ?>
                     <label for="id_author">Vyberte autora</label>
                     <select name="id_author" id="id_author">
@@ -79,7 +86,7 @@ $users = $repo->getAuthors();
                 <label for="visible"  style="word-wrap:break-word">
                     <input name="visible" id="visible"  type="checkbox" value="visible" />Zveřejnit
                 </label>
-                <input type="text" name="image_url" placeholder="Url obrázku">
+                <?php require_once 'image_picker.php';?>
                 <button type="submit">Přidat článek</button>
             </form>
         </div>

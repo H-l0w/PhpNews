@@ -10,8 +10,8 @@
 }
 
 img{
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 170px;
 }
 
 .author{
@@ -20,6 +20,7 @@ img{
     border-bottom: solid 4px #155dee;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     margin-bottom: 20px;
+    border-radius: 25px;
 }
 
  a{
@@ -51,6 +52,7 @@ h3{
     margin-left: 25px;
     border-bottom: solid 4px #155dee;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 25px;
 }
 
 .article_list h3{
@@ -67,7 +69,6 @@ h3{
     margin-bottom: -2px;
     text-decoration: none;
     border-bottom: solid 2px #155dee;
-
 }
 
 .title{
@@ -76,8 +77,8 @@ h3{
 }
 
 .content {
+    height: 75px;
     overflow-y: auto;
-    max-height: 250px;
     display: flex;
     flex-direction: column;
     padding: 0 18px;

@@ -18,6 +18,10 @@ a{
     height: 170px;
 }
 
+.article{
+    border-radius: 25px;
+}
+
 p{
     margin-top: 5px;
     margin-bottom: 5px;
@@ -43,7 +47,7 @@ h3{
     text-overflow: ellipsis;
     display: -webkit-box;
     overflow: hidden;
-    -webkit-line-clamp: 4; /* number of lines to show */
+    -webkit-line-clamp:5; /* number of lines to show */
     line-clamp: 2;
     -webkit-box-orient: vertical;
 }
@@ -118,4 +122,16 @@ h3{
     margin-bottom: 25px;
     display: flex;
     justify-content: flex-end;
+}
+
+.content p{
+    margin-top: 0;
+}
+
+.info{
+    display: flex;
+}
+
+.continue_reading{
+    margin-left:auto;
 }

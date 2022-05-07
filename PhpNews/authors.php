@@ -33,7 +33,7 @@ $repo = new ArticleRepo($db);
         ?>
         <div class="author">
             <div class="image">
-                <a href="author_category.php?id_author=<?= $author['id'] ?>"><img src="<?= $author['image_path'] ?>" alt=""></a>
+                <a href="author_category.php?id_author=<?= $author['id'] ?>"><img src="<?= $author['path'] ?>" alt=""></a>
             </div>
             <div class="inner">
                 <div class="name">

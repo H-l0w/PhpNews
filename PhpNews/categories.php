@@ -28,7 +28,7 @@ $categories = $repo->getCategories();
     <?php foreach($categories as $category): ?>
         <div class="category">
             <div class="image_title">
-                <a href="author_category.php?id_category=<?= $category['id'] ?>"><img src="<?= $category['image_url'] ?>" alt="">
+                <a href="author_category.php?id_category=<?= $category['id'] ?>"><img src="<?= $category['path'] ?>" alt="">
                 </a>
             </div>
             <div class="description">

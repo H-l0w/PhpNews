@@ -1,5 +1,6 @@
 body{
     font-family: sans-serif;
+    max-width: 1300px;
 }
 
 .menu_form{
@@ -134,4 +135,31 @@ form .images img{
 /* CHECKED STYLES */
 [type=radio]:checked + img {
     border: 2px solid red;
+}
+
+#category_label{
+    margin-top: 10px;
+}
+
+.categories{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    border: 2px solid black;
+    height: 100px;
+    overflow: auto;
+    border-radius: 5px;
+
+}
+
+.category{
+    margin: 10px 10px 0;
+}
+
+.category label{
+    margin-bottom: 0;
+}
+
+.category input{
+    margin-bottom: 0;
 }

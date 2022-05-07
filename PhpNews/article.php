@@ -20,6 +20,7 @@ if (!isset($_GET['id']))
 require_once 'Model/Database.php';
 require_once 'Model/ArticleRepo.php';
 require_once 'Model/CommentsRepo.php';
+require_once 'Model/CategoryRepo.php';
 require_once 'nav_bar.php';
 
 $db = new Database();
@@ -29,6 +30,9 @@ $article = $repo->getArticle($_GET['id']);
 
 $repo = new CommentsRepo($db);
 $comments = $repo->getCommentsForArticle($article['id']);
+
+$categoryRepo = new CategoryRepo($db);
+$categories = $categoryRepo->getCategoriesForArticle($article['id']);
 ?>
 
     <div class="article">
@@ -38,15 +42,21 @@ $comments = $repo->getCommentsForArticle($article['id']);
         <div class="under_title">
             <p class="date"><?= date("j.n.Y G:i", strtotime($article['date']))?></p>
         </div>
-        <div class="article_image">
-            <img src="<?= $article['image_url'] ?>" alt="">
-        </div>
         <div class="content">
             <p><?= $article['text'] ?></p>
         </div>
+        <div class="article_image">
+            <img src="<?= $article['path'] ?>" alt="">
+        </div>
         <div class="article_info">
-            <p>Autor: <a href="author_category.php?id_author=<?= $article['id_author'] ?>" class="author"><?= $article['a_name']. ' '. $article['a_surname'] ?></a></p>
-            <p>Kategorie <a href="author_category.php?id_category=<?= $article['id_category'] ?>"><?= $article['name'] ?></a></p>
+            <p>Autor:</p>
+            <a href="author_category.php?id_author=<?= $article['id_author'] ?>"><?= $article['a_name']. ' '. $article['a_surname'] ?></a>
+        </div>
+        <div class="categories">
+            <p>Kategorie:</p>
+            <?php foreach ($categories as $category): ?>
+                <a href="author_category.php?id_category=<?=$category['id']?>"><?=$category['name']?></a>
+            <?php endforeach;?>
         </div>
     </div>
     <div class="comment_section">
@@ -73,11 +83,6 @@ $comments = $repo->getCommentsForArticle($article['id']);
                     <div class="comment_text">
                         <p><?= $comment['text'] ?></p>
                     </div>
-                    <!--
-                    <div class="delete_comment">
-                        <a href="delete_comment.php?id=<?= $comment['id'] ?>&id_article=<?= $article['id'] ?>" >Odstranit komentář</a>
-                    </div>
-                    -->
                 </div>
             <?php endforeach; ?>
         </div>

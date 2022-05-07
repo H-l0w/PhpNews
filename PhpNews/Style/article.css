@@ -1,9 +1,12 @@
 .article img{
     width: 750px;
     height: 500px;
+    border: 1px solid black;
 }
 
-.content{
+.article{
+    border-radius: 25px;
+    margin-top: 20px;
     border-bottom: solid 4px #155dee;
 }
 
@@ -19,7 +22,6 @@
     gap: 50px;
     padding-bottom: 50px;
 }
-
 .article .article_image{
     text-align: center;
 }
@@ -29,6 +31,7 @@
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow-y: auto;
+    border-radius: 25px;
 }
 
 .comments h2{
@@ -79,11 +82,12 @@ a{
 }
 
 form{
+    border-radius: 25px;
+
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
     max-width: 650px;
     width: 100%;
 }
@@ -94,12 +98,14 @@ form input{
     margin-top: 15px;
     height: 35px;
     border-radius: 5px;
+    font-size: 120%;
 }
 
 textarea{
     margin: 25px;
     border-radius: 10px;
     resize: none;
+    padding: 5px;
 }
 
 button{
@@ -113,4 +119,36 @@ button{
 h2{
     margin-bottom: 0;
     text-align: center;
+}
+
+.comments h4, p{
+    margin-bottom: 0;
+}
+
+.categories, .article_info{
+    display: flex;
+    margin-top: 10px;
+    gap: 15px;
+    font-size: 120%;
+}
+
+.categories p, .article_info p{
+    padding-top: 7px;
+    margin-top: 0;
+}
+
+.article_info a, .categories a{
+    font-size: 120%;
+    background-color: #155dee;
+    padding: 5px;
+    border-radius: 15px;
+    color: white;
+}
+
+.categories a:hover{
+    transform: scale(1.2);
+}
+
+.article_info a:hover{
+    transform: scale(1.2);
 }

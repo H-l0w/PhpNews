@@ -35,7 +35,7 @@ $i = 0;
                 </div>
                 <div class="image">
                     <a href="article.php?id=<?= $article['id'] ?>">
-                        <img src="<?= $article['image_url'] ?>" alt="">
+                        <img src="<?= $article['path'] ?>" alt="">
                     </a>
                 </div>
             </div>
@@ -44,7 +44,7 @@ $i = 0;
     <div class="four_articles">
         <?php foreach($articles as $key => $article): if($key < 1) continue; if ($key == 5) break;?>
             <div class="four_articles_article">
-                <a href="article.php?id=<?= $article['id'] ?>"><img src="<?= $article['image_url'] ?>" alt=""></a>
+                <a href="article.php?id=<?= $article['id'] ?>"><img src="<?= $article['path'] ?>" alt=""></a>
                 <h3 class="title"><a class="title_link" href="article.php?id=<?= $article['id']?>"><?= $article['title'] ?></a></h3>
             </div>
         <?php endforeach; ?>
@@ -54,7 +54,7 @@ $i = 0;
                 <div class="article">
                     <div class="content">
                         <a class="title_link" href="article.php?id=<?= $article['id']?> ">
-                            <img src="<?= $article['image_url'] ?>" alt="">
+                            <img src="<?= $article['path'] ?>" alt="">
                         </a>
                         <div class="inner">
                             <h3 class="title"><a class="title_link" href="article.php?id=<?= $article['id']?>"><?= $article['title'] ?></a></h3>

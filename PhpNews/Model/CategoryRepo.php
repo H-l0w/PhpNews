@@ -44,4 +44,16 @@ class CategoryRepo
         $sql = 'SELECT COUNT(0) from category_assigns where id_category = :id';
         return $this->db->selectOne($sql, ['id' => $id]);
     }
+
+    public function assignArticleToCategory($idArticle, $idCategory){
+        $sql = 'INSERT INTO category_assigns VALUES(DEFAULT, :id_category, :id_article)';
+        return $this->db->insert($sql, ['id_category' => $idCategory, 'id_article' => $idArticle]);
+    }
+
+    public function getCategoriesForArticle($idArticle){
+        $sql = 'SELECT c.name, c.id FROM category_assigns cs
+                INNER JOIN categories c on c.id = cs.id_category
+                WHERE cs.id_article = :id_article';
+        return $this->db->selectWithParams($sql, ['id_article' => $idArticle]);
+    }
 }

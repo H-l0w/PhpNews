@@ -12,7 +12,7 @@ class UserRepo
     public function getAuthors(){
         $sql = 'SELECT u.id as id, u.name as name, u.surname as surname,
                 u.username as username, u.email as email, u.id_role as id_role,
-                r.name as role_description, u.description as description, i.path as image_path
+                r.name as role_description, u.description as description, i.path as path
                 FROM users u INNER JOIN 
                 roles r on r.id = u.id_role
                 INNER JOIN images i on i.id = u.id_image';
