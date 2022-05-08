@@ -50,7 +50,7 @@ require_once 'nav_bar.php';
                         <td><p><?= $user['name'] ?></p></td>
                         <td><p><?= $user['surname'] ?></p></td>
                         <td><p><?= $user["role_description"] ?></p></td>
-                        <td><a href="<?=$user['image_path']?>">zobrazit obrázek</a></td>
+                        <td><a href="<?=$user['path']?>">zobrazit obrázek</a></td>
                         <?php if(LoginService::IsAdministrator()):?>
                             <td>
                                 <div class="action">

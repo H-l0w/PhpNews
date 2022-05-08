@@ -13,13 +13,13 @@ $images = $imageRepo->getImages();
 
 <label for="">Vyberte obrázek</label>
 <div class="images">
-    <?php foreach ($images as $image): ?>
-        <?php if((isset($category) && $category['path'] === $image['path']) || (isset($user) && $user['path'] === $image['path'])): ?>
+    <?php foreach ($images as $image):?>
+        <?php if((isset($category) && $category['path'] === $image['path']) || (isset($user) && $user['path'] === $image['path']) || (isset($article) && $article['path'] === $image['path'])):?>
             <label>
                 <input type="radio" name="image" value="<?=$image['id']?>>" checked required>
                 <img src="<?=$image['path']?>" alt="<?=$image['name']?>">
             </label>
-        <?php else: ?>
+        <?php else:?>
             <label>
                 <input type="radio" name="image" value="<?=$image['id']?>>" required>
                 <img src="<?=$image['path']?>" alt="<?=$image['name']?>">

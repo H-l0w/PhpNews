@@ -50,7 +50,7 @@ class ArticleRepo
 
     public function getArticlesByAuthor($id)
     {
-        $sql = 'SELECT a.*, au.name as a_name, au.surname as a_surname, i.path FROM articles a 
+        $sql = 'SELECT a.*, au.name, au.surname, i.path FROM articles a 
                 INNER JOIN users au on a.id_author = au.id
                 INNER JOIN images i on i.id = a.id_image
                 WHERE a.id_author = :id';

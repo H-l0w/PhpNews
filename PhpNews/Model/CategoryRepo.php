@@ -50,6 +50,11 @@ class CategoryRepo
         return $this->db->insert($sql, ['id_category' => $idCategory, 'id_article' => $idArticle]);
     }
 
+    public function getBareCategories(){
+        $sql = 'SELECT c.name, c.id FROM categories c';
+        return $this->db->select($sql);
+    }
+
     public function getCategoriesForArticle($idArticle){
         $sql = 'SELECT c.name, c.id FROM category_assigns cs
                 INNER JOIN categories c on c.id = cs.id_category

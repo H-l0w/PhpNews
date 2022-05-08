@@ -40,12 +40,13 @@ require_once 'Model/CategoryRepo.php';
 require_once 'Model/UserRepo.php';
 
 $repo = new CategoryRepo($db);
-$categories = $repo->getCategories();
+$assignedCategories = $repo->getCategoriesForArticle($_GET['id']);
 $repo = new UserRepo($db);
 $users = $repo->getAuthors();
 $repo = new ArticleRepo($db);
 $article = $repo->getArticle($_GET['id']);
 $date = date("d/m/Y G:i", strtotime($article['date']));
+var_dump($assignedCategories);
 ?>
 <!doctype html>
 <html lang="en">
@@ -77,12 +78,7 @@ $date = date("d/m/Y G:i", strtotime($article['date']));
                 <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
                 <input type="text" name="title" required placeholder="Titulek článku" value="<?= $article['title'] ?>">
                 <textarea style="height: 700px" class="article_content" name="text" id="article_content" cols="30" rows="10" placeholder="Text článku"><?= $article['text'] ?></textarea>
-                <select name="id_category" id="article_category" required>
-                    <option value="" disabled selected>Vyberte kategorii</option>
-                    <?php foreach($categories as $category): ?>
-                        <option <?= $category['id'] == $article['id_category'] ? 'selected' : '' ?> value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <?php require_once 'category_picker.php';?>
                 <?php if (LoginService::IsAdministrator()) : ?>
                     <label for="id_author">Vyberte autora</label>
                     <select name="id_author" id="id_author">
@@ -97,7 +93,7 @@ $date = date("d/m/Y G:i", strtotime($article['date']));
                 <label for="">
                     <input name="visible" id="visible"  type="checkbox" value="visible" <?= $article['visible'] == 1 ? 'checked' : '' ?> />
                 </label>
-                <input type="text" name="image_url" placeholder="Url obrázku" value="<?= $article['image_url'] ?>">
+                <?php require_once 'image_picker.php';?>
                 <button type="submit">Upravit  článek</button>
             </form>
         </div>

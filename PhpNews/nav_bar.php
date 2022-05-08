@@ -12,8 +12,8 @@
 <?php
 session_start();
 $selected = 'index';
-$tabs = ['Články', 'Kategorie', 'Autoři', 'Administrace', 'Přidat článek'];
-$pages = ['index.php', 'categories.php', 'authors.php', 'administration_articles.php', 'add_article.php'];
+$tabs = ['Články', 'Kategorie', 'Autoři', 'Administrace'];
+$pages = ['index.php', 'categories.php', 'authors.php', 'administration_articles.php'];
 $actual_link = "$_SERVER[PHP_SELF]"; //getting page url
 
 $slash_pos = strripos($actual_link, '/');
@@ -45,7 +45,6 @@ if (str_contains($actual_link, 'administration'))
         <?php endforeach; ?>
         <?php if($is_logged === true): ?>
             <li><a class="<?= $selected === $pages[$i] ? 'selected' : '' ?>" href="administration_articles.php">Administrace</a></li>
-            <li><a class="<?= $selected === $pages[$i + 1] ? 'selected' : '' ?>" href="add_article.php">Přidat článek</a></li>
         <?php endif; ?>
         <div class="login_logout">
             <?php if($is_logged): ?>

@@ -9,17 +9,30 @@ require_once 'Model/Database.php';
 
 $db = new Database();
 $categoryRepo = new CategoryRepo($db);
-$categories = $categoryRepo->getCategories();
+$categories = $categoryRepo->getBareCategories();
 $i = 0;
 ?>
 
 <label for="" id="category_label">Přidat do kategorie</label>
 <div class="categories">
     <?php foreach ($categories as $category): $i++;?>
-        <div class="category">
-            <label for="category_<?=$i?>"><?=$category['name']?>
-                <input type="checkbox" id="category_<?=$i?>" name="category_<?=$i?>" value="<?=$category['id']?>">
-            </label>
-        </div>
+        <?php if (isset($assignedCategories) && array_search($category, $assignedCategories) != false): ?>
+            <div class="category">
+                <label for="category_<?=$i?>"><?=$category['name']?>
+                    <input type="checkbox" id="category_<?=$i?>" name="category_<?=$i?>" value="<?=$category['id']?>" checked>
+                </label>
+            </div>
+        <?php else:?>
+            <div class="category">
+                <label for="category_<?=$i?>"><?=$category['name']?>
+                    <input type="checkbox" id="category_<?=$i?>" name="category_<?=$i?>" value="<?=$category['id']?>">
+                </label>
+            </div>
+        <?php endif;?>
     <?php endforeach;?>
 </div>
+
+<?php
+unset($categories);
+unset($category)
+?>

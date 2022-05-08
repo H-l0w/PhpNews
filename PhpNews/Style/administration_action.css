@@ -1,11 +1,11 @@
 body{
     font-family: sans-serif;
     max-width: 1300px;
+    margin: 0 auto;
 }
 
 .menu_form{
     display: flex;
-    flex-direction: row;
     margin-top: 50px;
     gap: 25px;
 }
@@ -17,12 +17,12 @@ body{
 .main{
     display: flex;
     justify-content: center;
-    width: 100%;
 }
 
 .form_div{
     padding: 15px;
-    width: 100%;
+    max-width: 1000px;
+    min-width: 100%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
