@@ -3,10 +3,13 @@ require_once 'nav_bar.php';
 require_once 'Model/LoginService.php';
 require_once 'Model/ArticleRepo.php';
 require_once 'Model/Database.php';
+require_once 'Model/CategoryRepo.php';
 
 $db = new Database();
 $repo = new ArticleRepo($db);
 $author = $repo->getArticleAuthor($_GET['id']);
+$repo = new CategoryRepo($db);
+$assignedCategories = $repo->getCategoriesForArticle($_GET['id']);
 
 if(!LoginService::IsAdministrator()){
     if(!LoginService::IsAdministrator() && (string)$_SESSION['id'] != $author){
@@ -19,34 +22,51 @@ if (!isset($_GET['id'])){
     header('Location: administration_articles.php');
     die();
 }
-
-if (isset($_POST['id'], $_POST['date'],$_POST['id_category'], $_POST['title'], $_POST['text'], $_POST['image_url'])){
-
+if (isset($_POST['id'], $_POST['date'],$_POST['id_author'], $_POST['title'], $_POST['text'], $_POST['image'])){
     $id_author = $_POST['id_author'] ?? $_SESSION['id'];
 
-    $visible = 0;
     if (isset($_POST['visible']))
         $visible = 1;
+    else
+        $visible = 0;
+
     if (empty($_POST['date']))
         $_POST['date'] = $_POST['original_date'];
 
+    $assignedCategoriesAfterUpdate = [];
+    foreach ($_POST as $key => $item){
+        if(str_contains($key, 'category')){
+            $assignedCategoriesAfterUpdate[] = $item;
+        }
+    }
+
+    foreach ($assignedCategories as $cat){
+        if (!in_array($cat['id'], $assignedCategoriesAfterUpdate)){
+            $repo->deleteCategoryAssign($_POST['id'], $cat['id']);
+        }
+    }
+
+    foreach ($assignedCategoriesAfterUpdate as $cat){
+        if (!in_array($cat, $assignedCategories)){
+            $repo->assignArticleToCategory($_POST['id'], $cat);
+        }
+    }
+
+    var_dump($categoriesToRemove);
+
     $repo = new ArticleRepo($db);
-    $repo->updateArticle(['id' => $_POST['id'], 'date' => $_POST['date'],'id_author' => $id_author, 'id_category' => $_POST['id_category'],
-        'title' => $_POST['title'], 'text' => $_POST['text'], 'visible' => $visible, 'image_url' => $_POST['image_url']]);
+    $repo->updateArticle(['id' => $_POST['id'], 'date' => $_POST['date'],'id_author' => $id_author,
+        'title' => $_POST['title'], 'text' => $_POST['text'], 'visible' => $visible, 'id_image' => $_POST['image']]);
     header('Location: administration_articles.php');
     die();
 }
-require_once 'Model/CategoryRepo.php';
 require_once 'Model/UserRepo.php';
 
-$repo = new CategoryRepo($db);
-$assignedCategories = $repo->getCategoriesForArticle($_GET['id']);
 $repo = new UserRepo($db);
 $users = $repo->getAuthors();
 $repo = new ArticleRepo($db);
 $article = $repo->getArticle($_GET['id']);
 $date = date("d/m/Y G:i", strtotime($article['date']));
-var_dump($assignedCategories);
 ?>
 <!doctype html>
 <html lang="en">
@@ -90,7 +110,8 @@ var_dump($assignedCategories);
                 <?php endif; ?>
                 <label for="date">Čas zveřejnění</label>
                 <input name="date" type="datetime-local"  value="<?= $date ?>" >
-                <label for="">
+                <label for="visible">
+                    Zveřejnit
                     <input name="visible" id="visible"  type="checkbox" value="visible" <?= $article['visible'] == 1 ? 'checked' : '' ?> />
                 </label>
                 <?php require_once 'image_picker.php';?>

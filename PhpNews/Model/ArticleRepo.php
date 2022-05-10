@@ -33,8 +33,8 @@ class ArticleRepo
 
     public function updateArticle($params = [])
     {
-        $sql = 'UPDATE articles SET date = :date, id_author = :id_author, id_category = :id_category,
-                title = :title, text = :text , visible = :visible, image_url = :image_url
+        $sql = 'UPDATE articles SET date = :date, id_author = :id_author,
+                title = :title, text = :text , visible = :visible, id_image = :id_image
                 WHERE id = :id';
         $this->db->update($sql, $params);
     }

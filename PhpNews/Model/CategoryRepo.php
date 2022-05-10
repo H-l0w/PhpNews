@@ -50,6 +50,11 @@ class CategoryRepo
         return $this->db->insert($sql, ['id_category' => $idCategory, 'id_article' => $idArticle]);
     }
 
+    public function deleteCategoryAssign($idArticle, $idCategory){
+        $sql = 'DELETE FROM category_assigns where id_category = :id_category and id_article = :id_article';
+        $this->db->deleteWithParams($sql, ['id_article' => $idArticle, 'id_category' => $idCategory]);
+    }
+
     public function getBareCategories(){
         $sql = 'SELECT c.name, c.id FROM categories c';
         return $this->db->select($sql);

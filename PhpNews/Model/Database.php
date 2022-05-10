@@ -54,6 +54,11 @@ class Database
         return $stmt->rowCount();
     }
 
+    public function deleteWithParams($sql, $params){
+        $stmt = $this->execute($sql, $params);
+        return $stmt->rowCount();
+    }
+
     protected function execute($sql, $params = [])
     {
         $stmt = $this->conn->prepare($sql);

@@ -101,27 +101,31 @@ h3{
 }
 
 .latest_article .info a{
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     font-size: 200%;
 }
 
 .latest_article .image img{
-    width: 600px;
-    height: 400px;
+    width: 400px;
+    height: 290px;
 }
 
 .latest_preview{
     text-overflow: ellipsis;
     display: -webkit-box;
     overflow: hidden;
-    -webkit-line-clamp: 6; /* number of lines to show */
+    -webkit-line-clamp: 5; /* number of lines to show */
     line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 .continue_reading_latest{
-    margin-bottom: 25px;
+    margin-bottom: 0;
     display: flex;
     justify-content: flex-end;
+}
+
+.continue_reading_latest a{
+    margin-bottom: 0;
 }
 
 .content p{
@@ -130,8 +134,13 @@ h3{
 
 .info{
     display: flex;
+    height: 290px;
 }
 
 .continue_reading{
     margin-left:auto;
+}
+
+.latest .latest_article .continue_reading_latest{
+    margin-bottom: 0;
 }
