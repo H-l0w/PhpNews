@@ -61,4 +61,10 @@ class CategoryRepo
                 WHERE cs.id_article = :id_article';
         return $this->db->selectWithParams($sql, ['id_article' => $idArticle]);
     }
+
+    public function findCategories($search){
+        $sql = 'SELECT c.*, i.path FROM categories c INNER JOIN images i on i.id = c.id_image
+                WHERE c.name LIKE :search or c.description like :search';
+        return $this->db->selectWithParams($sql, ['search' => $search]);
+    }
 }

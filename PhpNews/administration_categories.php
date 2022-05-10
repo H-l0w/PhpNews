@@ -10,14 +10,23 @@
 </head>
 <body>
 <?php
+require_once 'nav_bar.php';
 require_once 'Model/Database.php';
 require_once 'Model/CategoryRepo.php';
 
 $db = new Database();
 $repo = new CategoryRepo($db);
-
-$categories = $repo->getCategories();
-require_once 'nav_bar.php';
+if (isset($_GET['search'])){
+    if (empty($_GET['search'])){
+        $categories = $repo->getCategories();
+    }
+    else{
+        $categories = $repo->findCategories('%'.$_GET['search'].'%');
+    }
+}
+else{
+    $categories = $repo->getCategories();
+}
 ?>
 <div class="administration">
     <?php require_once 'administration_menu.php'?>
@@ -25,6 +34,10 @@ require_once 'nav_bar.php';
         <div class="category_list">
             <div class="list_title">
                 <h2 id="categories">Seznam kategorií</h2>
+                    <form action="" method="get" class="search">
+                        <input type="search" name="search" placeholder="Vyhledat kategorii" value="<?=$_GET['search'] ?? ''?>">
+                        <button type="submit">Vyhledat</button>
+                    </form>
             </div>
             <div class="error">
                 <?php if(isset($_GET['error']) &&$_GET['error'] == 'category_contains_articles'): ?>

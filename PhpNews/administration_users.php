@@ -15,8 +15,17 @@ require_once 'Model/UserRepo.php';
 
 $db = new Database();
 $repo = new UserRepo($db);
-
-$users = $repo->getAuthors();
+if (isset($_GET['search'])){
+    if (empty($_GET['search'])){
+        $users = $repo->getAuthors();
+    }
+    else{
+        $users = $repo->findUsers('%'.$_GET['search'].'%');
+    }
+}
+else{
+    $users = $repo->getAuthors();
+}
 require_once 'nav_bar.php';
 ?>
 <div class="administration">
@@ -25,6 +34,10 @@ require_once 'nav_bar.php';
         <div class="author_list">
             <div class="list_title">
                 <h2 id="users">Seznam uživatelů</h2>
+                <form action="" method="get" class="search">
+                    <input type="search" name="search" placeholder="Vyhledat uživatele" value="<?=$_GET['search'] ?? ''?>">
+                    <button type="submit">Vyhledat</button>
+                </form>
             </div>
             <div class="error">
                 <?php if(isset($_GET['error']) &&$_GET['error'] == 'author_has_articles'): ?>

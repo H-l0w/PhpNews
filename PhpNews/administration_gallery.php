@@ -29,7 +29,17 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit'){
     }
 }
 
-$images = $repo->getImages();
+if (isset($_GET['search'])){
+    if(empty($_GET['search'])){
+        $images = $repo->getImages();
+    }
+    else{
+        $images = $repo->findImages('%'.$_GET['search'].'%');
+    }
+}
+else{
+    $images = $repo->getImages();
+}
 ?>
 
 <!doctype html>
@@ -39,7 +49,7 @@ $images = $repo->getImages();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Administrace - galerie</title>
     <link rel="stylesheet" href="Style/administration.css">
 </head>
 <body>
@@ -48,6 +58,10 @@ $images = $repo->getImages();
     <div class="list">
         <div class="list_title">
             <h2>Seznam obrázků</h2>
+            <form action="" method="get" class="search">
+                <input type="search" name="search" placeholder="Vyhledat obrázky" value="<?=$_GET['search'] ?? ''?>">
+                <button type="submit">Vyhledat</button>
+            </form>
         </div>
         <?php if (empty($images)): ?>
             <div class="error">
@@ -58,11 +72,35 @@ $images = $repo->getImages();
             <div class="error">
                 <h2>Chyba při nahrávání obrázku</h2>
             </div>
+        <?php endif;?>
+        <?php if (isset($_GET['error']) && $_GET['error'] === 'image_delete'):?>
+        <div class="error">
+            <h2>Chyba při mazání obrázku</h2>
+        </div>
+        <?php endif;?>
+        <?php if (isset($_GET['error']) && $_GET['error'] === 'image_used'): ?>
+        <?php $imageUsing = $repo->getImageUsing($_GET["id"]); ?>
+            <div class="error">
+                <h2>Obrázek je používán</h2>
+                <div class="using">
+                    <h4>Použití:</h4>
+                        <?php foreach ($imageUsing as $using): ?>
+                            <?php if($using['what'] === 'článek'):?>
+                                <a href="article.php?id=<?=$using['id']?>"><?=$using['title'].' - '. $using['what']?></a>
+                            <?php elseif ($using['what'] === 'kategorie'):?>
+                                <a href="author_category.php?id_category=<?=$using['id']?>"><?=$using['title'].' - '.$using['what']?></a>
+                            <?php elseif ($using['what'] === 'uživatel'):?>
+                                <a href="author_category.php?id_author=<?=$using['id']?>"><?=$using['title'].' - '.$using['what']?></a>
+                            <?php endif;?>
+                            <br>
+                        <?php endforeach;?>
+                </div>
+            </div>
         <?php endif; ?>
-        <div class="images_list">
+        <div class="images_list" <?=empty($images) ? "style= 'justify-content: center'" : '' ?>>
             <div class="image">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <label for="">Přidat obrázek</label>
+                <form class="image_add" action="" method="post" enctype="multipart/form-data">
+                    <h2 for="">Přidat obrázek</h2>
                     <input type="text" name="name" placeholder="jméno obrázku">
                     <textarea name="description" id="" cols="30" rows="10" placeholder="Popisek obrázku"></textarea>
                     <input type="file" name="add_image" accept=".png, .jpg, .jpeg" >
@@ -74,7 +112,10 @@ $images = $repo->getImages();
                     <a href="<?=$image['path']?>" target="_blank">
                         <img src="<?=$image['path']?>" alt="<?=$image['name']?>">
                     </a>
-                    <p><?=$image['name']?></p>
+                    <div class="name_action">
+                        <p><?=$image['name']?></p>
+                        <a href="delete_image.php?id=<?=$image['id']?>"" class="delete">Smazat</a>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>

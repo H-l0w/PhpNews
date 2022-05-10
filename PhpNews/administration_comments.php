@@ -44,7 +44,7 @@ if (isset($_GET['id_article'])){
             <div class="article_select">
                 <form action="" method="get">
                     <label for="">
-                        Článek
+                        Vyberte článek
                     </label>
                     <select name="id_article" class="select_article">
                         <?php foreach ($articles as $a): ?>

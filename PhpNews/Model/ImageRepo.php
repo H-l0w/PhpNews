@@ -24,6 +24,31 @@ class ImageRepo
         return $this->db->select($sql);
     }
 
+    public function findImages($search){
+        $sql = 'SELECT * FROM images WHERE name LIKE :search OR description LIKE :search';
+        return $this->db->selectWithParams($sql, ['search' => $search]);
+    }
+
+    public function getImage($id){
+        $sql = 'SELECT * FROM images WHERE id = :id';
+        return $this->db->selectOne($sql, ['id' => $id]);
+    }
+
+    public function getImageUsing($id){
+        $sql = "SELECT a.title, 'článek' as what, a.id FROM articles a where a.id_image = :id
+                UNION
+                SELECT c.name, 'kategorie' as what, c.id FROM categories c where c.id_image = :id
+                UNION
+                SELECT u.username, 'uživatel' as what, u.id FROM users u where u.id_image = :id
+                ORDER BY what";
+        return $this->db->selectWithParams($sql, ['id' => $id]);
+    }
+
+    public function deleteImage($id){
+        $sql = 'DELETE FROM images WHERE id = :id';
+        $this->db->delete($sql,$id);
+    }
+
     public function addImage($files, $imageNameInFiles, $imageNameToStore, $description){
         $target_dir = "Images/";
         $extension = strtolower(pathinfo($files[$imageNameInFiles]['name'],PATHINFO_EXTENSION));

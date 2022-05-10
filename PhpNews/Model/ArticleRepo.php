@@ -79,4 +79,12 @@ class ArticleRepo
         $sql = 'SELECT a.id_author FROM articles a WHERE a.id = :id';
         return $this->db->selectOne($sql, ['id' => $id])['id_author'];
     }
+
+    public function findArticles($search){
+        $sql = 'SELECT a.*,au.name as a_name, au.surname as a_surname FROM articles a 
+                INNER JOIN users au on a.id_author = au.id
+                WHERE a.title like :search
+                ORDER BY a.date DESC';
+        return $this->db->selectWithParams($sql, ['search' => $search]);
+    }
 }

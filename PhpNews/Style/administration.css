@@ -64,6 +64,26 @@ h1{
     color: red;
 }
 
+.error p{
+    margin: 0;
+}
+
+.using{
+    color: black;
+}
+
+.using h4{
+    margin: 0;
+}
+
+.using ul{
+    display: flex;
+    flex-direction: column;
+    background: none;
+    list-style-type: disc;
+    font-size: 100%;
+}
+
 a{
     text-decoration: none;
     color: #155dee;
@@ -73,7 +93,16 @@ a{
 .article_select{
     font-size: 150%;
     margin-top: 20px;
+
     text-align: center;
+}
+
+.article_select form{
+    flex-direction: column;
+    margin: 0 auto;
+    height: 120px;
+    max-width: 300px;
+    display: flex;
 }
 
 .article_select select{
@@ -122,12 +151,29 @@ a{
     margin-top: 5px;
 }
 
-form{
+.image_add{
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 300px;
     height: 250px;
+}
+
+.image_add h2{
+    margin-bottom: 20px;
+}
+
+.name_action{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.name_action p {
+    margin: 0;
+}
+
+.name_action a{
 }
 
 input{
@@ -146,4 +192,8 @@ textarea{
     height: 80px;
     resize: none;
     text-align: center;
+}
+
+.search{
+    max-height: 150px;
 }

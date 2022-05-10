@@ -23,7 +23,17 @@ if (!LoginService::IsAdministrator() && !LoginService::IsCreator()){
 $db = new Database();
 $repo = new ArticleRepo($db);
 
-$articles = $repo->getAllArticles();
+if (isset($_GET['search'])){
+    if (empty($_GET['search'])){
+        $articles = $repo->getAllArticles();
+    }
+    else{
+        $articles = $repo->findArticles('%'.$_GET['search'].'%');
+    }
+}
+else{
+    $articles = $repo->getAllArticles();
+}
 ?>
 
 <div class="administration">
@@ -31,6 +41,10 @@ $articles = $repo->getAllArticles();
     <div class="list">
         <div class="list_title">
             <h2 id="articles">Seznam článků</h2>
+            <form action="" method="get" class="search">
+                <input type="search" name="search" placeholder="Vyhledat článek" value="<?=$_GET['search'] ?? ''?>">
+                <button type="submit">Vyhledat</button>
+            </form>
         </div>
         <table>
             <th>ID</th>
