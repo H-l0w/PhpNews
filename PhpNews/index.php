@@ -23,14 +23,13 @@ $i = 0;
 <body>
     <?php require_once 'nav_bar.php'?>
     <div class="introduction">
-        <h1>Články</h1>
+        <h1>Nejnovější články</h1>
     </div>
     <div class="latest">
         <?php foreach ($articles as $key => $article): if ($key > 0) break ?>
             <div class="latest_article">
                 <div class="info">
                     <a href="article.php?id=<?= $article['id'] ?>"><?= $article['title'] ?></a>
-                    <div class="latest_preview"><?= $article['text'] ?></div>
                     <a style="font-size: 100%" class="continue_reading_latest" href="article.php?id=<?=$article['id']?>">Číst dále</a>
                 </div>
                 <div class="image">

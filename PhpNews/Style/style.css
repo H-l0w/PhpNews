@@ -18,7 +18,7 @@ a{
     height: 170px;
 }
 
-.article{
+.latest_article, .article, .four_articles_article{
     border-radius: 25px;
 }
 
@@ -134,7 +134,6 @@ h3{
 
 .info{
     display: flex;
-    height: 290px;
 }
 
 .continue_reading{
@@ -143,4 +142,8 @@ h3{
 
 .latest .latest_article .continue_reading_latest{
     margin-bottom: 0;
+}
+
+.four_articles_article:hover, .latest_article:hover, .article:hover{
+    transform: scale(1.05);
 }

@@ -22,7 +22,7 @@ require_once 'Model/LoginService.php'
 ?>
 <div class="menu">
     <h1>Administrace</h1>
-    <ul>
+    <ul class="admin_nav_bar">
         <li class="<?= str_contains($page, 'articles') || str_contains($page, 'article') ? 'selected' : '' ?>"><a href="administration_articles.php">Články</a></li>
         <li class="<?= str_contains($page, 'categories')  || str_contains($page, 'category')? 'selected' : '' ?>"><a href="administration_categories.php">Kategorie</a></li>
         <li class="<?= str_contains($page, 'users') || str_contains($page, 'user') ? 'selected' : '' ?>"><a href="administration_users.php">Uživatelé</a></li>

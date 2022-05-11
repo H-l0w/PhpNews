@@ -8,7 +8,7 @@ body{
     background-color: #b6c2d9;
 }
 
-ul {
+.nav_bar, .admin_nav_bar {
     font-size: 150%;
     list-style-type: none;
     margin: 0;
@@ -34,7 +34,7 @@ li {
 
 }
 
-li a {
+.nav_bar li a, .admin_nav_bar li a {
     display: block;
     color: white;
     text-align: center;
@@ -42,7 +42,7 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+.nav_bar li a:hover, .admin_nav_bar li a:hover {
     background-color: #b6c2d9;
 }
 

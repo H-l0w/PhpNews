@@ -77,9 +77,18 @@ h3{
 }
 
 .content {
-    height: 75px;
+    height: 170px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     padding: 0 18px;
+}
+
+.author:hover, .article_list:hover{
+    transform: scale(1.05);
+}
+
+h1{
+    margin-bottom: 30px;
+    margin-top: 30px;
 }

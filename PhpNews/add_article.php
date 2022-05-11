@@ -69,7 +69,7 @@ $users = $repo->getAuthors();
                 <h2>Přidat článek</h2>
             </div>
             <form action="" method="post">
-                <input type="text" name="title" required placeholder="Titulek článku" maxlength="75">
+                <input type="text" name="title" required placeholder="Titulek článku" maxlength="100">
                 <textarea style="height: 700px" class="article_content" name="text" id="article_content" cols="30" rows="10" placeholder="Text článku"></textarea>
                 <?php require_once 'category_picker.php';?>
                 <?php if(LoginService::IsAdministrator()): ?>

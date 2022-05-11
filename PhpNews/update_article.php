@@ -46,13 +46,12 @@ if (isset($_POST['id'], $_POST['date'],$_POST['id_author'], $_POST['title'], $_P
         }
     }
 
+    $assignedCategoriesIds = array_column($assignedCategories, 'id');
     foreach ($assignedCategoriesAfterUpdate as $cat){
-        if (!in_array($cat, $assignedCategories)){
+        if (!in_array($cat, $assignedCategoriesIds)){
             $repo->assignArticleToCategory($_POST['id'], $cat);
         }
     }
-
-    var_dump($categoriesToRemove);
 
     $repo = new ArticleRepo($db);
     $repo->updateArticle(['id' => $_POST['id'], 'date' => $_POST['date'],'id_author' => $id_author,

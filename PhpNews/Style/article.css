@@ -128,6 +128,7 @@ h2{
 .categories, .article_info{
     display: flex;
     margin-top: 10px;
+    flex-wrap: wrap;
     gap: 15px;
     font-size: 120%;
 }
@@ -151,4 +152,13 @@ h2{
 
 .article_info a:hover{
     transform: scale(1.2);
+}
+
+.content img{
+    width: 100%;
+    height: 100%;
+}
+
+.content a{
+
 }
