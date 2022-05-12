@@ -23,7 +23,10 @@ $i = 0;
 <body>
     <?php require_once 'nav_bar.php'?>
     <div class="introduction">
-        <h1>Nejnovější články</h1>
+        <div class="inner">
+            <h1>Nejnovější články</h1>
+            <?php require_once 'search_form.php'?>
+        </div>
     </div>
     <div class="latest">
         <?php foreach ($articles as $key => $article): if ($key > 0) break ?>

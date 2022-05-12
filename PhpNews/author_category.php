@@ -41,9 +41,15 @@ require_once 'nav_bar.php';
 ?>
 <body>
     <?php if($category === null): ?>
-        <h1>Výpis článků pro autora: <?= $author['name']. ' '. $author['surname'] ?></h1>
+        <div class="inner">
+            <h1>Výpis článků pro autora: <?= $author['name']. ' '. $author['surname'] ?></h1>
+            <?php require_once 'search_form.php'?>
+        </div>
     <?php else: ?>
-        <h1>Výpis článků v kategorii: <?= $category['name'] ?></h1>
+        <div class="inner">
+            <h1>Výpis článků v kategorii: <?= $category['name'] ?></h1>
+            <?php require_once 'search_form.php'?>
+        </div>
     <?php endif; ?>
 
     <div class="articles">
@@ -53,7 +59,7 @@ require_once 'nav_bar.php';
                     <a class="title_link" href="article.php?id=<?= $article['id']?> ">
                         <img src="<?= $article['path'] ?>" alt="">
                     </a>
-                    <div class="inner">
+                    <div class="detail">
                         <h3 class="title"><a class="title_link" href="article.php?id=<?= $article['id']?>"><?= $article['title'] ?></a></h3>
                         <div class="article_preview"><?= $article['text']?></div>
                         <p>Autor: <a href="author_category.php?id_author=<?= $article['id_author'] ?>"><?= $article['name']. ' '. $article['surname']?></a></p>

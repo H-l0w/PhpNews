@@ -22,7 +22,10 @@ $categories = $repo->getCategories();
 ?>
 <body>
 <div class="title">
-    <h1>Seznam kategorií</h1>
+    <div class="inner">
+        <h1>Sezanam kategorií</h1>
+        <?php require_once 'search_form.php'?>
+    </div>
 </div>
 <div class="categories">
     <?php foreach($categories as $category): ?>

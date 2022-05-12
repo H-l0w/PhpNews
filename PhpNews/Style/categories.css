@@ -52,6 +52,10 @@ img{
 }
 
 h1{
-    margin-bottom: 5px;
-    margin-top: 30px;
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
+.inner{
+    margin-bottom: 0 !important;
 }

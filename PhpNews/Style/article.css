@@ -155,10 +155,9 @@ h2{
 }
 
 .content img{
-    width: 100%;
-    height: 100%;
+    all: initial;
 }
 
-.content a{
-
+.content img{
+    max-width: 100%;
 }

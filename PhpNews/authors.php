@@ -24,7 +24,10 @@ $authors = $repo->getAuthors();
 $repo = new ArticleRepo($db);
 ?>
 <div class="header">
-    <h1>Seznam autorů</h1>
+    <div class="inner">
+        <h1>Seznam autorů</h1>
+        <?php require_once 'search_form.php'?>
+    </div>
 </div>
 <div class="authors">
     <?php foreach($authors as $author): ?>
@@ -35,7 +38,7 @@ $repo = new ArticleRepo($db);
             <div class="image">
                 <a href="author_category.php?id_author=<?= $author['id'] ?>"><img src="<?= $author['path'] ?>" alt=""></a>
             </div>
-            <div class="inner">
+            <div class="detail">
                 <div class="name">
                     <a href="author_category.php?id_author=<?= $author['id'] ?>"><h3><?= $author['name']. ' '. $author['surname'] ?></h3></a>
                 </div>
