@@ -58,7 +58,7 @@ $i = 0;
                         <a class="title_link" href="article.php?id=<?= $article['id']?> ">
                             <img src="<?= $article['path'] ?>" alt="">
                         </a>
-                        <div class="inner">
+                        <div>
                             <h3 class="title"><a class="title_link" href="article.php?id=<?= $article['id']?>"><?= $article['title'] ?></a></h3>
                             <div class="article_preview"><?= $article['text']?></div>
                                 <p>Autor: <a href="author_category.php?id_author=<?= $article['id_author'] ?>"><?= $article['a_name']. ' '. $article['a_surname']?></a></p>
