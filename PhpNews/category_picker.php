@@ -11,27 +11,37 @@ $db = new Database();
 $categoryRepo = new CategoryRepo($db);
 $categories = $categoryRepo->getBareCategories();
 $i = 0;
-$cat = $categories[0];
+$isEmpty = false;
+if (count($categories) > 0)
+    $cat = $categories[0];
+else
+    $isEmpty = true;
 ?>
 
 <label for="" id="category_label">Přidat do kategorie</label>
-<div class="categories">
-    <?php foreach ($categories as $category): $i++;?>
-        <?php if (isset($assignedCategories) && in_array($category, $assignedCategories)):?>
-            <div class="category">
-                <label for="category_<?=$i?>"><?=$category['name']?>
-                    <input type="checkbox" id="category_<?=$i?>" name="category_<?=$i?>" value="<?=$category['id']?>" checked>
-                </label>
-            </div>
-        <?php else:?>
-            <div class="category">
-                <label for="category_<?=$i?>"><?=$category['name']?>
-                    <input type="checkbox" id="category_<?=$i?>" name="category_<?=$i?>" value="<?=$category['id']?>">
-                </label>
+    <?php if($isEmpty): ?>
+        <div class="empty">
+            <h2>Nenalezeny žádné kategorie</h2>
+        </div>
+    <?php else:?>
+    <div class="categories">
+        <?php foreach ($categories as $category): $i++;?>
+            <?php if (isset($assignedCategories) && in_array($category, $assignedCategories)):?>
+                <div class="category">
+                    <label for="category_<?=$i?>"><?=$category['name']?>
+                        <input type="checkbox" id="category_<?=$i?>" name="category_<?=$i?>" value="<?=$category['id']?>" checked>
+                    </label>
+                </div>
+            <?php else:?>
+                <div class="category">
+                    <label for="category_<?=$i?>"><?=$category['name']?>
+                        <input type="checkbox" id="category_<?=$i?>" name="category_<?=$i?>" value="<?=$category['id']?>">
+                    </label>
+                </div>
             </div>
         <?php endif;?>
     <?php endforeach;?>
-</div>
+    <?php endif;?>
 
 <?php
 unset($categories);
