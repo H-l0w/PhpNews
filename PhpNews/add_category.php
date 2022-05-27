@@ -10,6 +10,7 @@ $db = new Database();
 
 if (isset($_POST['name'], $_POST['description'], $_POST['image']))
 {
+    var_dump($_POST);
     require_once 'Model/CategoryRepo.php';
     $repo = new CategoryRepo($db);
     $repo->addCategory(['name' => $_POST['name'], 'description' => $_POST['description'], 'id_image' => $_POST['image']]);
