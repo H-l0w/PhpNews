@@ -10,6 +10,11 @@
 </head>
 <body>
 <?php
+if (!LoginService::IsCreator() && !LoginService::IsAdministrator()){
+    header('Location: index.php');
+    die();
+}
+
 $page = basename($_SERVER['PHP_SELF']);
 
 //fix for older php version

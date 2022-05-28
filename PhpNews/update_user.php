@@ -59,6 +59,7 @@ if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
     header('Location: administration_users.php');
     die();
 }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -72,7 +73,7 @@ if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
 </head>
 <body>
 <div class="menu_form">
-    <?php require_once 'administration_menu.php' ?>
+    <?php require_once 'administration_menu.php'?>
     <div class="main">
         <div class="form_div">
             <div class="title">

@@ -12,6 +12,8 @@
 <?php
 require_once 'Model/Database.php';
 require_once 'Model/UserRepo.php';
+require_once 'Model/LoginService.php';
+
 
 $db = new Database();
 $repo = new UserRepo($db);

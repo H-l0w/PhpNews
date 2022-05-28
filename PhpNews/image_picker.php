@@ -1,6 +1,6 @@
 <?php
 require_once 'Model/LoginService.php';
-if(!LoginService::IsAdministrator()){
+if(!LoginService::IsAdministrator() && !LoginService::IsCreator()){
     header('Location: index.php');
     die();
 }

@@ -13,6 +13,8 @@
 require_once 'nav_bar.php';
 require_once 'Model/Database.php';
 require_once 'Model/CategoryRepo.php';
+require_once 'Model/LoginService.php';
+
 
 $db = new Database();
 $repo = new CategoryRepo($db);
