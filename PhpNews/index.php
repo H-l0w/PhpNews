@@ -47,7 +47,7 @@ $i = 0;
         <?php foreach($articles as $key => $article): if($key < 1) continue; if ($key == 5) break;?>
             <div class="four_articles_article">
                 <a href="article.php?id=<?= $article['id'] ?>"><img src="<?= $article['path'] ?>" alt=""></a>
-                <h3 class="title"><a class="title_link" href="article.php?id=<?= $article['id']?>"><?= $article['title'] ?></a></h3>
+                <h4 class="title"><a class="title_link" href="article.php?id=<?= $article['id']?>"><?= $article['title'] ?></a></h4>
             </div>
         <?php endforeach; ?>
     </div>

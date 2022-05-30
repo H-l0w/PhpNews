@@ -92,3 +92,5 @@ COLLATE utf8_czech_ci;
 
 INSERT INTO roles VALUES(DEFAULT, 'Administrator');
 INSERT INTO roles VALUES(DEFAULT, 'Editor');
+INSERT INTO images VALUES(DEFAULT, 'admin.png', 'Default admin profile image', 'Images/admin.png');
+INSERT INTO users VALUES(DEFAULT, 'Admin', 'Admin', 'Admin', 'admin@admin.com', '$2y$10$.0FVBhBbzr66u/3tQ422yehij6j082TSUPhSUzHDzB7p6WNzwAgjq', 1,1, 'Default administrator user')

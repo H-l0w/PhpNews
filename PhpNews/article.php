@@ -65,9 +65,9 @@ $categories = $categoryRepo->getCategoriesForArticle($article['id']);
                 <form action="add_comment.php" method="post">
                     <h2>Přidat komentář</h2>
                     <input type="hidden" name="id_article" value="<?= $article['id'] ?>">
-                    <input placeholder="Zadejte jméno" type="text" name="name">
-                    <input placeholder="Zadejte email" type="email" name="email">
-                    <textarea name="comment" cols="30" rows="10" placeholder="Sem napište svůj komentář"></textarea>
+                    <input required placeholder="Zadejte jméno" type="text" name="name">
+                    <input required placeholder="Zadejte email" type="email" name="email">
+                    <textarea required name="comment" cols="30" rows="10" placeholder="Sem napište svůj komentář"></textarea>
                     <button type="submit">Přidat komentář</button>
                 </form>
             </div>

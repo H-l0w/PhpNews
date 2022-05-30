@@ -4,6 +4,11 @@ if(!isset($_POST['name'], $_POST['email'], $_POST['comment'], $_POST['id_article
     die();
 }
 
+if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['comment'])){
+    header('Location: article.php?id='. $_POST['id_article']);
+    die();
+}
+
 require_once 'Model/Database.php';
 require_once 'Model/CommentsRepo.php';
 

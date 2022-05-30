@@ -38,9 +38,9 @@ else
                         <input type="checkbox" id="category_<?=$i?>" name="category_<?=$i?>" value="<?=$category['id']?>">
                     </label>
                 </div>
-            </div>
         <?php endif;?>
     <?php endforeach;?>
+    </div>
     <?php endif;?>
 
 <?php
