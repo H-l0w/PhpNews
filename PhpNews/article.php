@@ -43,7 +43,7 @@ $categories = $categoryRepo->getCategoriesForArticle($article['id']);
             <p class="date"><?= date("j.n.Y G:i", strtotime($article['date']))?></p>
         </div>
         <div class="content">
-            <p><?= $article['text'] ?></p>
+            <?= $article['text'] ?>
         </div>
         <div class="article_image">
             <img src="<?= $article['path'] ?>" alt="">

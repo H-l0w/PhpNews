@@ -82,35 +82,37 @@ if(isset($_POST['name'], $_POST['surname'], $_POST['username'], $_POST['email'],
     }
 }
 ?>
-<div class="form_div" id="register" style="margin: 0 auto 0">
-    <div class="title">
-        <h1>Registrace</h1>
-    </div>
-    <div class="error">
-        <div class="error_message">
-            <h3 id="e">
-                <?php if(isset($_GET['error'])): ?>
-                    <?php if($_GET['error'] === 'user_exists'): ?>
-                        Zadaný uživatel již existuje
-                    <?php elseif($_GET['error'] === 'upload_fail'): ?>
-                        Chyba při nahrávání obrázku
-                    <?php endif;?>
-                <?php endif;?>
-            </h3>
+<div class="register">
+    <div class="form_div" id="register" style="margin: 0 auto 0">
+        <div class="title">
+            <h1>Registrace</h1>
         </div>
-    </div>
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="text" placeholder="Jméno" name="name" required id="name">
-        <input type="text" placeholder="Příjímení" required name="surname">
-        <input type="text" placeholder="Uživatelské jméno" required name="username">
-        <input type="email" placeholder="Email" required name="email">
-        <input placeholder="Heslo" type="password" name="password" id="pass" required>
-        <input placeholder="Potvrdit heslo" type="password" id="pass_check" required>
-        <input type="file" name="profile_image" id="profile_image" accept=".png, .jpg, .jpeg" required>
-        <textarea name="description" id="" cols="30" rows="10" placeholder="Popisek uživatele" required></textarea>
+        <div class="error">
+            <div class="error_message">
+                <h3 id="e">
+                    <?php if(isset($_GET['error'])): ?>
+                        <?php if($_GET['error'] === 'user_exists'): ?>
+                            Zadaný uživatel již existuje
+                        <?php elseif($_GET['error'] === 'upload_fail'): ?>
+                            Chyba při nahrávání obrázku
+                        <?php endif;?>
+                    <?php endif;?>
+                </h3>
+            </div>
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="text" placeholder="Jméno" name="name" required id="name">
+            <input type="text" placeholder="Příjímení" required name="surname">
+            <input type="text" placeholder="Uživatelské jméno" required name="username">
+            <input type="email" placeholder="Email" required name="email">
+            <input placeholder="Heslo" type="password" name="password" id="pass" required>
+            <input placeholder="Potvrdit heslo" type="password" id="pass_check" required>
+            <input type="file" name="profile_image" id="profile_image" accept=".png, .jpg, .jpeg" required>
+            <textarea name="description" id="" cols="30" rows="10" placeholder="Popisek uživatele" required></textarea>
 
-        <button type="submit">Registrovat</button>
-    </form>
+            <button type="submit">Registrovat</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

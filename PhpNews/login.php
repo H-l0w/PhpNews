@@ -34,22 +34,24 @@ if (isset($_POST['username'], $_POST['password'])){
 }
 
 ?>
-<div class="form_div">
-    <div class="title">
-        <h1>Přihlášení</h1>
+<div class="login">
+    <div class="form_div">
+        <div class="title">
+            <h1>Přihlášení</h1>
+        </div>
+        <div class="error">
+            <?php if($wrong_credentials): ?>
+                <div class="error_message">
+                    <h3>Chyba při přihlašování</h3>
+                </div>
+            <?php endif; ?>
+        </div>
+        <form action="" method="post">
+            <input required placeholder="Uživatelské jméno nebo email" type="text" name="username">
+            <input  required placeholder="Heslo" type="password" name="password">
+            <button type="submit">Přihlásit</button>
+        </form>
     </div>
-    <div class="error">
-        <?php if($wrong_credentials): ?>
-            <div class="error_message">
-                <h3>Chyba při přihlašování</h3>
-            </div>
-        <?php endif; ?>
-    </div>
-    <form action="" method="post">
-        <input placeholder="Uživatelské jméno nebo email" type="text" name="username">
-        <input placeholder="Heslo" type="password" name="password">
-        <button type="submit">Přihlásit</button>
-    </form>
 </div>
 </body>
 </html>

@@ -37,7 +37,7 @@ foreach($pages as $page){
 if (str_contains($actual_link, 'administration'))
     $selected = 'administration_articles.php';
 ?>
-<div class="menu">
+<div >
     <ul class="nav_bar">
         <?php foreach ($tabs as $i => $tab): ?>
             <?php if($i > 2): break; endif;?>

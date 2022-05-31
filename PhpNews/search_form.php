@@ -1,21 +1,21 @@
 <style>
-    .form_div{
-        display: flex;
+    .form_div_search{
+        form_div_search: flex;
         justify-content: right;
         margin-top: 25px;
         margin-bottom: 0;
     }
 
-    .form_div input, .form_div button{
+    .form_div_search input, .form_div button{
         border-radius: 5px;
     }
 
-    .form_div button:hover{
+    .form_div_search button:hover{
         background-color: #b6c2d9;
     }
 
 </style>
-<div class="form_div">
+<div class="form_div_search">
     <form action="search.php" method="get">
         <input type="hidden" value="<?=$_SERVER['REQUEST_URI']?>" name="origin">
         <input type="search" placeholder="Vyhledat na stránce" name="search" value="<?=$_GET['search'] ?? ''?>">

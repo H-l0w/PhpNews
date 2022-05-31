@@ -48,9 +48,15 @@ h3{
     text-overflow: ellipsis;
     display: -webkit-box;
     overflow: hidden;
+    max-width: 900px;
+    width: 100%;
     -webkit-line-clamp:5; /* number of lines to show */
     line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+
+.article_preview p{
+    max-width: 900px;
 }
 
 .title{

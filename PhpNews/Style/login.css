@@ -17,11 +17,16 @@ h3{
 
 }
 
+.login, .register{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
 .form_div{
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-    max-width: 450px;
+    max-width: 500px;
     width: 50%;
-    margin: 200px auto 0;
     padding: 20px;
     border-radius: 25px;
 }
@@ -35,23 +40,33 @@ form input{
     text-align: center;
     font-size: 140%;
     border-radius: 5px;
-    margin: 0 auto 25px;
-    width: 300px;
+    margin: 0 auto 20px auto;
+    max-width: 500px;
     height: 40px;
+    padding: 0;
+    width: 100%;
 }
 
 form button{
     border-radius: 5px;
-    width: 305px;
+    padding: 0;
+    max-width: 300px;
     height: 40px;
     margin: 0 auto;
     font-size: 150%;
+    width: 100%;
 }
 
 textarea{
     margin: 0 auto 25px;
-    width: 300px;
-    height: 300px;
+    max-width: 300px;
+    max-height: 300px;
     resize: none;
     font-size: 140%;
+}
+
+@media only screen and (max-width: 800px) {
+    .form_div{
+        width: 100%;
+    }
 }
