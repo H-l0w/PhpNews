@@ -82,8 +82,8 @@ h3{
 }
 
 .four_articles_article img{
-    width: 250px;
-    height: 170px;
+    max-width: 250px;
+    max-height: 170px;
 }
 
 .latest_article{
@@ -109,6 +109,12 @@ h3{
 .latest_article .image img{
     width: 400px;
     height: 290px;
+}
+
+.latest_article .image{
+    display: flex;
+    justify-content: right;
+    margin-left: auto;
 }
 
 .latest_preview{
@@ -180,6 +186,31 @@ h3{
     max-width: 700px;
 }
 
+@media only screen and (max-width: 1000px) {
+    .four_articles{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .four_articles .title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .latest_article{
+        display: block;
+    }
+
+    .latest_article .image{
+        display: flex;
+        justify-content: center;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .content{
         display: block;
@@ -189,5 +220,32 @@ h3{
         display: flex;
         justify-content: center;
         margin-bottom: 10px;
+    }
+
+    .latest_article .image{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .four_articles_article{
+        display: block;
+    }
+
+    .four_articles_article a{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .four_articles_article img{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .title_link img{
+        display: none;
     }
 }

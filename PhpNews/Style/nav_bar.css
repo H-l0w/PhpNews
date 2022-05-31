@@ -33,7 +33,7 @@ a{
 
 li {
     float: left;
-
+    white-space: nowrap;
 }
 
 .nav_bar li a, .admin_nav_bar li a {
@@ -51,4 +51,45 @@ li {
 .login_logout{
     display: flex;
     justify-content: right;
+}
+
+.inner{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 900px) {
+    ul{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .login_logout{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    ul{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .login_logout{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .inner{
+        display: block;
+    }
+
+    .form_div{
+        display: flex;
+        justify-content: left !important;
+    }
 }

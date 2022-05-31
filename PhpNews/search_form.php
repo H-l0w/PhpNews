@@ -6,12 +6,6 @@
         margin-bottom: 0;
     }
 
-    .inner{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-
     .form_div input, .form_div button{
         border-radius: 5px;
     }

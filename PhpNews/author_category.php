@@ -42,7 +42,7 @@ require_once 'nav_bar.php';
 <body>
     <?php if($category === null): ?>
         <div class="inner">
-            <h1>Výpis článků pro autora: <?= $author['name']. ' '. $author['surname'] ?></h1>
+            <h1>Autor: <?= $author['name']. ' '. $author['surname'] ?></h1>
             <?php require_once 'search_form.php'?>
         </div>
     <?php else: ?>
