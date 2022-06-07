@@ -12,7 +12,7 @@ class LoginService
     public static function IsAdministrator():bool{
         if (self::IsLogged() == false)
             return  false;
-        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Administrator'){
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
             return true;
         }
         return  false;

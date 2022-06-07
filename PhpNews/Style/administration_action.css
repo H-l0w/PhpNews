@@ -111,6 +111,7 @@ a{
     border: 2px black solid;
     padding: 5px;
     border-radius: 5px;
+    justify-content: center;
 }
 
 form .images img{
@@ -149,7 +150,7 @@ form .images img{
     height: 100px;
     overflow: auto;
     border-radius: 5px;
-
+    justify-content: center;
 }
 
 .empty h2{
@@ -166,4 +167,23 @@ form .images img{
 
 .category input{
     margin-bottom: 0;
+}
+
+@media only screen and (max-width: 800px) {
+    .menu_form{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .menu{
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .admin_nav_bar{
+        display: flex !important;
+        flex-direction: column !important;
+    }
 }

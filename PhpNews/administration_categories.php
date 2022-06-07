@@ -47,18 +47,18 @@ else{
                 <?php endif; ?>
             </div>
             <table>
-                <th>ID</th>
+                <th class="hide">ID</th>
                 <th>Jméno</th>
-                <th>Popis</th>
+                <th class="hide">Popis</th>
                 <th>Obrázek</th>
                 <?php if(LoginService::IsAdministrator()): ?>
                     <th>Akce</th>
                 <?php endif; ?>
                 <?php foreach ($categories as $category): ?>
                     <tr>
-                        <td><p><?= $category['id'] ?></p></td>
+                        <td class="hide"><p><?= $category['id'] ?></p></td>
                         <td><p><?= $category['name'] ?></p></td>
-                        <td><p><?= $category['description'] ?></p></td>
+                        <td class="hide"><p><?= $category['description'] ?></p></td>
                         <td><a href="<?= $category['path'] ?>">Zobrazit obrázek</a></td>
                         <?php if(LoginService::IsAdministrator()):?>
                         <td>

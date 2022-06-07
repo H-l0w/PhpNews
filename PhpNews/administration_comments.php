@@ -61,19 +61,19 @@ if (isset($_GET['id_article'])){
         </div>
         <div class="comments_list">
             <table>
-                <td>ID</td>
+                <td class="hide">ID</td>
                 <td>Email</td>
                 <td>Jméno</td>
-                <td>Text</td>
+                <td class="hide">Text</td>
                 <td>Datum</td>
                 <td>Akce</td>
                 <?php foreach ($comments as $comment): ?>
                 <tr>
-                    <td><p><?= $comment['id'] ?></p></td>
+                    <td class="hide"><p><?= $comment['id'] ?></p></td>
                     <td><p><?= $comment['email'] ?></p></td>
                     <td><p><?= $comment['name'] ?></p></td>
-                    <td><p><?= $comment['text'] ?></p></td>
-                    <td><p><?= date("j.n.Y G:i", strtotime($comment['date'])) ?></p></td>
+                    <td class="hide"><p><?= $comment['text'] ?></p></td>
+                    <td><p><?= date("j.n.Y", strtotime($comment['date'])) ?></p></td>
                     <td><a class="delete" href="delete_comment.php?id=<?= $comment['id'].'&id_article='.$_GET['id_article']?>">Odstranit</a></td>
                 </tr>
                 <?php endforeach; ?>

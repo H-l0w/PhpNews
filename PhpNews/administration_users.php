@@ -47,25 +47,25 @@ require_once 'nav_bar.php';
                 <?php endif; ?>
             </div>
             <table>
-                <th>ID</th>
-                <th>Uživatelské jméno</th>
-                <th>Email</th>
+                <th class="hide">ID</th>
+                <th>Uživatel. jméno</th>
+                <th class="hide">Email</th>
                 <th>Jméno</th>
                 <th>Přijímení</th>
                 <th>Role</th>
-                <th>Obrázek</th>
+                <th class="hide">Obrázek</th>
                 <?php if(LoginService::IsAdministrator()) :?>
                     <th>Akce</th>
                 <?php endif; ?>
                 <?php foreach ($users as $user): ?>
                     <tr>
-                        <td><p><?= $user['id'] ?></p></td>
+                        <td class="hide"><p><?= $user['id'] ?></p></td>
                         <td><p><?= $user['username'] ?></p></td>
-                        <td><p><?= $user['email'] ?></p></td>
+                        <td class="hide"><p><?= $user['email'] ?></p></td>
                         <td><p><?= $user['name'] ?></p></td>
                         <td><p><?= $user['surname'] ?></p></td>
                         <td><p><?= $user["role_description"] ?></p></td>
-                        <td><a href="<?=$user['path']?>">zobrazit obrázek</a></td>
+                        <td class="hide"><a href="<?=$user['path']?>">zobrazit obrázek</a></td>
                         <?php if(LoginService::IsAdministrator()):?>
                             <td>
                                 <div class="action">

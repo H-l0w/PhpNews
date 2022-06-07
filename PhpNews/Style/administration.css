@@ -91,33 +91,35 @@ a{
 }
 
 .article_select{
+    width: 100%;
     font-size: 150%;
     margin-top: 20px;
-
     text-align: center;
 }
 
 .article_select form{
     flex-direction: column;
     margin: 0 auto;
-    height: 120px;
-    max-width: 300px;
     display: flex;
+    gap: 10px;
 }
 
 .article_select select{
     height: 35px;
     font-size: 60%;
+    max-width: 350px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .article_select button{
     height: 35px;
     font-size: 60%;
+    max-width: 350px;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.select_article{
-    min-width: 300px;
-}
 
 .delete{
     color: red;
@@ -128,6 +130,7 @@ a{
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
 }
 
@@ -196,4 +199,29 @@ textarea{
 
 .search{
     max-height: 150px;
+}
+
+@media only screen and (max-width: 800px) {
+    .administration{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .menu{
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .admin_nav_bar{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .hide{
+        display: none;
+    }
 }
