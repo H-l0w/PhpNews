@@ -163,14 +163,6 @@ h2{
     color: white;
 }
 
-.categories a:hover{
-    transform: scale(1.2);
-}
-
-.article_info a:hover{
-    transform: scale(1.2);
-}
-
 .content img{
     all: initial;
 }

@@ -67,7 +67,10 @@ require_once 'nav_bar.php';
                         <p>Autor: <a href="author_category.php?id_author=<?= $article['id_author'] ?>"><?= $article['name']. ' '. $article['surname']?></a></p>
                         <div class="article_info">
                             <p>Vydáno: <?=  date("j.n.Y G:i", strtotime($article['date'])); ?></p>
-                            <a class="continue_reading" href="article.php?id=<?=$article['id']?>">Číst dále</a>
+                            <div class="inner_info">
+                                <p>Počet zobrazení: <?= $article['views'] ?>x</p>
+                                <a class="continue_reading" href="article.php?id=<?=$article['id']?>">Číst dále</a>
+                            </div>
                         </div>
                     </div>
                 </div>
