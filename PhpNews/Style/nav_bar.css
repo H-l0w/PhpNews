@@ -36,6 +36,10 @@ li {
     white-space: nowrap;
 }
 
+img{
+    object-fit: cover;
+}
+
 .nav_bar li a, .admin_nav_bar li a {
     display: block;
     color: white;

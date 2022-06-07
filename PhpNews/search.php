@@ -34,6 +34,9 @@ $results = $searchRepo->search('%'.$_GET['search'].'%');
     <?php require_once 'search_form.php'?>
 </div>
 <div class="results">
+    <?php if(count($results) === 0): ?>
+        <h2 class="error">Nebyly nalezeny žádné výsledky</h2>
+    <?php endif; ?>
     <?php foreach ($results as $res): ?>
         <?php
             if ($res['type'] === 'Článek'){

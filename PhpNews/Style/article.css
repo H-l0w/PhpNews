@@ -22,6 +22,15 @@ body{
     padding: 15px;
 }
 
+.content {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.content li{
+    white-space: normal !important;
+}
+
 .comment_section{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -129,12 +138,16 @@ h2{
     margin-bottom: 0;
 }
 
-.categories, .article_info{
+.categories, .article_info, .views{
     display: flex;
     margin-top: 10px;
     flex-wrap: wrap;
     gap: 15px;
     font-size: 120%;
+}
+
+.views{
+    margin-top: 0;
 }
 
 .categories p, .article_info p{

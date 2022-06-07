@@ -37,7 +37,6 @@ else{
     die();
 }
 require_once 'nav_bar.php';
-
 ?>
 <body>
     <?php if($category === null): ?>
@@ -53,6 +52,9 @@ require_once 'nav_bar.php';
     <?php endif; ?>
 
     <div class="articles">
+        <?php if (count($articles) === 0):?>
+            <h2 class="error">Nenalezeny žádné články</h2>
+        <?php endif; ?>
         <?php foreach ($articles as $article): ?>
             <div class="article">
                 <div class="content">

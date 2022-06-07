@@ -58,6 +58,10 @@ h1{
     margin-top: 15px;
 }
 
+.error{
+    color: red;
+}
+
 .inner{
     margin-bottom: 0 !important;
 }

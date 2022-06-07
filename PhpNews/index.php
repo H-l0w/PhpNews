@@ -29,6 +29,9 @@ $i = 0;
         </div>
     </div>
     <div class="latest">
+        <?php if(count($articles) === 0): ?>
+            <h2 class="error">Nejsou publikovány žádné články</h2>
+        <?php endif;?>
         <?php foreach ($articles as $key => $article): if ($key > 0) break ?>
             <div class="latest_article">
                 <div class="info">
@@ -66,7 +69,10 @@ $i = 0;
                                 <p>Autor: <a href="author_category.php?id_author=<?= $article['id_author'] ?>"><?= $article['a_name']. ' '. $article['a_surname']?></a></p>
                             <div class="info">
                                 <p>Vydáno: <?=  date("j.n.Y G:i", strtotime($article['date'])); ?></p>
-                                <a class="continue_reading" href="article.php?id=<?=$article['id']?>">Číst dále</a>
+                                <div class="inner_info">
+                                    <p>Počet zobrazení: <?= $article['views'] ?></p>
+                                    <a class="continue_reading" href="article.php?id=<?=$article['id']?>">Číst dále</a>
+                                </div>
                             </div>
                         </div>
                     </div>

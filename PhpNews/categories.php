@@ -27,6 +27,9 @@ $categories = $repo->getCategories();
         <?php require_once 'search_form.php'?>
     </div>
 </div>
+<?php if (count($categories) === 0): ?>
+    <h2 class="error">Nenalezeny žádné kategorie</h2>
+<?php endif;?>
 <div class="categories">
     <?php foreach($categories as $category): ?>
         <div class="category">

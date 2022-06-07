@@ -58,6 +58,9 @@ $categories = $categoryRepo->getCategoriesForArticle($article['id']);
                 <a href="author_category.php?id_category=<?=$category['id']?>"><?=$category['name']?></a>
             <?php endforeach;?>
         </div>
+        <div class="views">
+            <p>Zobrazeno: <?= $article['views'] ?>x</p>
+        </div>
     </div>
     <div class="comment_section">
         <div class="add_comment">

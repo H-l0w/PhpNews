@@ -30,6 +30,9 @@ $repo = new ArticleRepo($db);
     </div>
 </div>
 <div class="authors">
+    <?php if (count($authors) === 0): ?>
+        <h2 class="error">Neexistují žádní autoři</h2>
+    <?php endif;?>
     <?php foreach($authors as $author): ?>
         <?php
             $articles = $repo->getArticlesByAuthor($author['id']);
@@ -51,6 +54,9 @@ $repo = new ArticleRepo($db);
         <div class="article_list">
             <h3>Seznam článků</h3>
             <div class="content">
+                <?php if (count($articles) === 0): ?>
+                    <h4 class="error">Autor nepublikoval žádné články</h4>
+                <?php endif;?>
                 <?php foreach ($articles as $article): ?>
                     <a class="title" href="article.php?id=<?= $article['id'] ?>"><?= $article['title'] ?></a>
                 <?php endforeach; ?>

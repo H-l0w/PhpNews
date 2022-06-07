@@ -84,6 +84,11 @@ h3{
     padding: 0 18px;
 }
 
+.error{
+    margin-top: 0;
+    color: red;
+}
+
 .author:hover, .article_list:hover{
     transform: scale(1.05);
 }

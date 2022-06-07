@@ -147,8 +147,12 @@ h3{
 
 .info{
     display: flex;
+    flex-direction: column;
 }
 
+.inner_info{
+    display: flex;
+}
 .continue_reading{
     margin-left:auto;
 }
@@ -189,7 +193,11 @@ h3{
 }
 
 .title_type{
-    max-width: 700px;
+    max-width: 1000px;
+}
+
+.error{
+    color: red;
 }
 
 @media only screen and (max-width: 1000px) {

@@ -45,6 +45,7 @@ class ArticleRepo
                 INNER JOIN users au on a.id_author = au.id
                 INNER JOIN images i on i.id = a.id_image
                 WHERE a.id = :id';
+        $this->updateArticleViews($id);
         return $this->db->selectOne($sql, ['id' => $id]);
     }
 
@@ -86,5 +87,10 @@ class ArticleRepo
                 WHERE a.title like :search
                 ORDER BY a.date DESC';
         return $this->db->selectWithParams($sql, ['search' => $search]);
+    }
+
+    private function updateArticleViews($id){
+        $sql = 'UPDATE articles SET views = views + 1 where id = :id';
+        return $this->db->update($sql, ['id' => $id]);
     }
 }

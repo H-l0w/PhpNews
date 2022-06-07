@@ -134,6 +134,7 @@ a{
 .image img{
     width: 300px;
     height: 250px;
+    object-fit: cover;
 }
 
 .image{
@@ -143,7 +144,6 @@ a{
     margin-bottom: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     padding: 5px;
-
 }
 
 .image p{
