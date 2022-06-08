@@ -46,31 +46,33 @@ else{
                     <h2 id="category_contains_articles">Nelze smazat kategorii, která obsahuje články</h2>
                 <?php endif; ?>
             </div>
-            <table>
-                <th class="hide">ID</th>
-                <th>Jméno</th>
-                <th class="hide">Popis</th>
-                <th>Obrázek</th>
-                <?php if(LoginService::IsAdministrator()): ?>
-                    <th>Akce</th>
-                <?php endif; ?>
-                <?php foreach ($categories as $category): ?>
-                    <tr>
-                        <td class="hide"><p><?= $category['id'] ?></p></td>
-                        <td><p><?= $category['name'] ?></p></td>
-                        <td class="hide"><p><?= $category['description'] ?></p></td>
-                        <td><a href="<?= $category['path'] ?>">Zobrazit obrázek</a></td>
-                        <?php if(LoginService::IsAdministrator()):?>
-                        <td>
-                            <div class="action">
-                                <a class="delete" href="delete_category.php?id=<?= $category['id'] ?>">Smazat</a>
-                                <a href="update_category.php?id=<?= $category['id'] ?>">Upravit</a>
-                            </div>
-                        </td>
-                        <?php endif; ?>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
+            <div class="table_wrapper">
+                <table>
+                    <th>ID</th>
+                    <th>Jméno</th>
+                    <th>Popis</th>
+                    <th>Obrázek</th>
+                    <?php if(LoginService::IsAdministrator()): ?>
+                        <th>Akce</th>
+                    <?php endif; ?>
+                    <?php foreach ($categories as $category): ?>
+                        <tr>
+                            <td><p><?= $category['id'] ?></p></td>
+                            <td><p><?= $category['name'] ?></p></td>
+                            <td><p><?= $category['description'] ?></p></td>
+                            <td><a href="<?= $category['path'] ?>">Zobrazit obrázek</a></td>
+                            <?php if(LoginService::IsAdministrator()):?>
+                                <td>
+                                    <div class="action">
+                                        <a class="delete" href="delete_category.php?id=<?= $category['id'] ?>">Smazat</a>
+                                        <a href="update_category.php?id=<?= $category['id'] ?>">Upravit</a>
+                                    </div>
+                                </td>
+                            <?php endif; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
             <?php if(LoginService::IsAdministrator()): ?>
                 <div class="add">
                     <h3>

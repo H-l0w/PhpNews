@@ -46,39 +46,41 @@ require_once 'nav_bar.php';
                     <h2 id="category_contains_articles">Nelze smazat autora, který publikoval články</h2>
                 <?php endif; ?>
             </div>
-            <table>
-                <th class="hide">ID</th>
-                <th>Uživatel. jméno</th>
-                <th class="hide">Email</th>
-                <th>Jméno</th>
-                <th>Přijímení</th>
-                <th>Role</th>
-                <th class="hide">Obrázek</th>
-                <?php if(LoginService::IsAdministrator()) :?>
-                    <th>Akce</th>
-                <?php endif; ?>
-                <?php foreach ($users as $user): ?>
-                    <tr>
-                        <td class="hide"><p><?= $user['id'] ?></p></td>
-                        <td><p><?= $user['username'] ?></p></td>
-                        <td class="hide"><p><?= $user['email'] ?></p></td>
-                        <td><p><?= $user['name'] ?></p></td>
-                        <td><p><?= $user['surname'] ?></p></td>
-                        <td><p><?= $user["role_description"] ?></p></td>
-                        <td class="hide"><a href="<?=$user['path']?>">zobrazit obrázek</a></td>
-                        <?php if(LoginService::IsAdministrator()):?>
-                            <td>
-                                <div class="action">
-                                    <?php if ($user['id'] !== $_SESSION['id']): ?>
-                                        <a class="delete" href="delete_user.php?id=<?= $user['id'] ?>">Smazat</a>
-                                    <?php endif;?>
-                                    <a href="update_user.php?id=<?= $user['id'] ?>">Upravit</a>
-                                </div>
-                            </td>
-                        <?php endif; ?>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
+            <div class="table_wrapper">
+                <table>
+                    <th>ID</th>
+                    <th>Uživatel. jméno</th>
+                    <th>Email</th>
+                    <th>Jméno</th>
+                    <th>Přijímení</th>
+                    <th>Role</th>
+                    <th class="hide">Obrázek</th>
+                    <?php if(LoginService::IsAdministrator()) :?>
+                        <th>Akce</th>
+                    <?php endif; ?>
+                    <?php foreach ($users as $user): ?>
+                        <tr>
+                            <td><p><?= $user['id'] ?></p></td>
+                            <td><p><?= $user['username'] ?></p></td>
+                            <td><p><?= $user['email'] ?></p></td>
+                            <td><p><?= $user['name'] ?></p></td>
+                            <td><p><?= $user['surname'] ?></p></td>
+                            <td><p><?= $user["role_description"] ?></p></td>
+                            <td class="hide"><a href="<?=$user['path']?>">zobrazit obrázek</a></td>
+                            <?php if(LoginService::IsAdministrator()):?>
+                                <td>
+                                    <div class="action">
+                                        <?php if ($user['id'] !== $_SESSION['id']): ?>
+                                            <a class="delete" href="delete_user.php?id=<?= $user['id'] ?>">Smazat</a>
+                                        <?php endif;?>
+                                        <a href="update_user.php?id=<?= $user['id'] ?>">Upravit</a>
+                                    </div>
+                                </td>
+                            <?php endif; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
             <?php if(LoginService::IsAdministrator()) :?>
                 <div class="add">
                     <h3>

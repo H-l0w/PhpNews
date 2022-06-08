@@ -46,40 +46,42 @@ else{
                 <button type="submit">Vyhledat</button>
             </form>
         </div>
-        <table>
-            <th class="hide">ID</th>
-            <th>Autor</th>
-            <th>Datum publikace</th>
-            <th class="hide">Titulek</th>
-            <th>Viditelnost</th>
-            <th>Akce</th>
-            <?php foreach ($articles as $key => $article): ?>
-                <tr>
-                    <td class="hide"><?= $article['id'] ?></td>
-                    <td>
-                        <a href="author_category.php?id_author=<?= $article['id_author'] ?>">
-                            <?= $article['a_name']. ' '. $article['a_surname']?></a>
-                    </td>
-                    <td>
-                        <p class="date"><?=  date("j.n.Y G:i", strtotime($article['date'])); ?></p>
-                    </td>
-                    <td class="hide">
-                        <a href="article.php?id=<?= $article['id'] ?>"><?= $article['title'] ?></a>
-                    </td>
-                    <td>
-                        <p><?= $article['visible'] == true ? 'Viditelné' : 'Skryté' ?></p>
-                    </td>
-                    <td>
-                        <?php if(LoginService::IsAdministrator() || $_SESSION['id'] == $article['id_author']):?>
-                            <div class="action">
-                                <a class="delete" href="delete_article.php?id=<?=$article['id']?>">Smazat</a>
-                                <a href="update_article.php?id=<?=$article['id']?>">Upravit</a>
-                            </div>
-                        <?php endif;?>
-                    </td>
-                </tr>
-            <?php endforeach;?>
-        </table>
+        <div class="table_wrapper">
+            <table>
+                <th>ID</th>
+                <th>Autor</th>
+                <th>Datum publikace</th>
+                <th>Titulek</th>
+                <th>Viditelnost</th>
+                <th>Akce</th>
+                <?php foreach ($articles as $key => $article): ?>
+                    <tr>
+                        <td><?= $article['id'] ?></td>
+                        <td>
+                            <a href="author_category.php?id_author=<?= $article['id_author'] ?>">
+                                <?= $article['a_name']. ' '. $article['a_surname']?></a>
+                        </td>
+                        <td>
+                            <p class="date"><?=  date("j.n.Y G:i", strtotime($article['date'])); ?></p>
+                        </td>
+                        <td>
+                            <a href="article.php?id=<?= $article['id'] ?>"><?= $article['title'] ?></a>
+                        </td>
+                        <td>
+                            <p><?= $article['visible'] == true ? 'Viditelné' : 'Skryté' ?></p>
+                        </td>
+                        <td>
+                            <?php if(LoginService::IsAdministrator() || $_SESSION['id'] == $article['id_author']):?>
+                                <div class="action">
+                                    <a class="delete" href="delete_article.php?id=<?=$article['id']?>">Smazat</a>
+                                    <a href="update_article.php?id=<?=$article['id']?>">Upravit</a>
+                                </div>
+                            <?php endif;?>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+            </table>
+        </div>
         <div class="add">
             <h3>
                 <a href="add_article.php">Přidat článek</a>

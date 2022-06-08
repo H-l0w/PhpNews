@@ -60,24 +60,26 @@ if (isset($_GET['id_article'])){
                 <h2>Seznam komentářů</h2>
         </div>
         <div class="comments_list">
-            <table>
-                <td class="hide">ID</td>
-                <td>Email</td>
-                <td>Jméno</td>
-                <td class="hide">Text</td>
-                <td>Datum</td>
-                <td>Akce</td>
-                <?php foreach ($comments as $comment): ?>
-                <tr>
-                    <td class="hide"><p><?= $comment['id'] ?></p></td>
-                    <td><p><?= $comment['email'] ?></p></td>
-                    <td><p><?= $comment['name'] ?></p></td>
-                    <td class="hide"><p><?= $comment['text'] ?></p></td>
-                    <td><p><?= date("j.n.Y", strtotime($comment['date'])) ?></p></td>
-                    <td><a class="delete" href="delete_comment.php?id=<?= $comment['id'].'&id_article='.$_GET['id_article']?>">Odstranit</a></td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
+            <div class="table_wrapper">
+                <table>
+                    <td>ID</td>
+                    <td>Email</td>
+                    <td>Jméno</td>
+                    <td>Text</td>
+                    <td>Datum</td>
+                    <td>Akce</td>
+                    <?php foreach ($comments as $comment): ?>
+                        <tr>
+                            <td><p><?= $comment['id'] ?></p></td>
+                            <td><p><?= $comment['email'] ?></p></td>
+                            <td><p><?= $comment['name'] ?></p></td>
+                            <td><p><?= $comment['text'] ?></p></td>
+                            <td><p><?= date("j.n.Y", strtotime($comment['date'])) ?></p></td>
+                            <td><a class="delete" href="delete_comment.php?id=<?= $comment['id'].'&id_article='.$_GET['id_article']?>">Odstranit</a></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
         </div>
         <?php endif; ?>
     </div>

@@ -221,7 +221,18 @@ textarea{
 }
 
 @media only screen and (max-width: 600px) {
-    .hide{
-        display: none;
+    .table_wrapper{
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin-right: 15px;
+    }
+
+    .list{
+        padding: 0;
+    }
+
+
+    table{
+        margin-left: 15px;
     }
 }
