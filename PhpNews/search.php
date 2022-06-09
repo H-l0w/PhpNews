@@ -1,20 +1,20 @@
 <?php
-if (!isset($_GET['origin'], $_GET['search'])){
+if (!isset($_GET['search'])){
     header("Location: index.php");
-    die();
-}
-
-if (empty($_GET['search'])){
-    header("Location: ".$_GET['origin']);
     die();
 }
 
 require_once 'Model/Database.php';
 require_once 'Model/SearchRepo.php';
+require_once 'Model/PageRepo.php';  
 
 $db = new Database();
 $searchRepo = new SearchRepo($db);
-$results = $searchRepo->search('%'.$_GET['search'].'%');
+
+$pagesNumber = $searchRepo->getNumberOfPages('%'.$_GET['search'].'%');
+$actualPage = PageRepo::getActualPage($pagesNumber); 
+
+$results = $searchRepo->search('%'.$_GET['search'].'%', $actualPage);
 ?>
 
 <!doctype html>
@@ -69,6 +69,11 @@ $results = $searchRepo->search('%'.$_GET['search'].'%');
             </div>
         </div>
     <?php  endforeach; ?>
+</div>
+<div class="pagination">
+    <a href="search.php?page=<?=$actualPage -1?>&search=<?=$_GET['search']?>" <?= $actualPage == 1 ? 'class="invisible"' : "" ?> ><i class="arrow left"></i></a>
+    <p><?=$actualPage .' / '. $pagesNumber?></p>
+    <a href="search.php?page=<?=$actualPage + 1?>&search=<?=$_GET['search']?>" <?= $actualPage == $pagesNumber ? 'class="invisible"' : "" ?>><i class="arrow right"></i></a>
 </div>
 </body>
 </html>

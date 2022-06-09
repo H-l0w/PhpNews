@@ -10,21 +10,13 @@ if(!LoginService::IsAdministrator() && !LoginService::IsCreator()){
 
 require_once 'Model/ImageRepo.php';
 require_once 'Model/Database.php';
+require_once 'Model/PageRepo.php';
 
 $db = new Database();
 $imageRepo = new ImageRepo($db);
 $pagesNumber = $imageRepo->getPagesNumber();
-$actualPage = 1;
-if (isset($_GET['page']) && !empty($_GET['page'])){
-    if (!is_numeric($_GET['page']))
-        $actualPage = 1;
-    else if ($_GET['page'] > $pagesNumber)
-        $actualPage = $pagesNumber;
-    else if ($_GET['page'] < 1)
-        $actualPage = 1;
-    else
-        $actualPage = $_GET['page'];
-}
+$actualPage = PageRepo::getActualPage($pagesNumber);
+
 $images = $imageRepo->getImages($actualPage);
 $origin;
 $id;

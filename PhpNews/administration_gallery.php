@@ -3,6 +3,7 @@ require_once 'nav_bar.php';
 require_once 'Model/ImageRepo.php';
 require_once 'Model/Database.php';
 require_once 'Model/LoginService.php';
+require_once 'Model/PageRepo.php';
 
 if (!LoginService::IsCreator() && !LoginService::IsAdministrator()){
     header('Location: index.php');
@@ -13,18 +14,7 @@ $db = new Database();
 $repo = new ImageRepo($db);
 
 $pagesNumber = $repo->getPagesNumber();
-$actualPage = 1;
-
-if (isset($_GET['page']) && !empty($_GET['page'])){
-    if (!is_numeric($_GET['page']))
-        $actualPage = 1;
-    else if ($_GET['page'] > $pagesNumber)
-        $actualPage = $pagesNumber;
-    else if ($_GET['page'] < 1)
-        $actualPage = 1;
-    else
-        $actualPage = $_GET['page'];
-}
+$actualPage = PageRepo::getActualPage($pagesNumber);
 
 
 if (isset($_POST['submit']) && $_POST['submit'] === 'submit'){

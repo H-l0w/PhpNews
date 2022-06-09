@@ -11,23 +11,14 @@
 <?php
 require_once 'Model/Database.php';
 require_once 'Model/ArticleRepo.php';
+require_once 'Model/PageRepo.php';
 
 $db = new Database();
 
 $repo = new ArticleRepo($db);
 $pagesNumber = $repo->getPagesNumber();
-$actualPage = 1;
+$actualPage = PageRepo::getActualPage($pagesNumber);
 
-if (isset($_GET['page']) && !empty($_GET['page'])){
-    if (!is_numeric($_GET['page']))
-        $actualPage = 1;
-    else if ($_GET['page'] > $pagesNumber)
-        $actualPage = $pagesNumber;
-    else if ($_GET['page'] < 1)
-        $actualPage = 1;
-    else
-        $actualPage = $_GET['page'];
-}
 $articles = $repo->getArticles($actualPage);
 $i = 0;
 ?>

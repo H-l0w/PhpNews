@@ -15,7 +15,9 @@ a{
 }
 
 .article img, .result img{
-    max-width: 250px;
+    width: 250px;
+    height: 170px;
+    object-fit: cover;
 }
 
 .latest_article, .article, .four_articles_article, .result{
@@ -35,6 +37,10 @@ h3{
     margin-bottom: 15px;
     border-bottom: solid 4px #155dee;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.result{
+    height: 200px;
 }
 
 .content{

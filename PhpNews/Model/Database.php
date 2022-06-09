@@ -37,6 +37,11 @@ class Database
         return $stmt->fetch();
     }
 
+    public function selectOneWithParams($sql, $params){
+        $stmt = $this->execute($sql, $params);
+        return $stmt->fetch();
+    }
+
     public function insert($sql, $params)
     {
         $stmt = $this->execute($sql, $params);

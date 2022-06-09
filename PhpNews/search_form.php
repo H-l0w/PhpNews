@@ -17,7 +17,6 @@
 </style>
 <div class="form_div_search">
     <form action="search.php" method="get">
-        <input type="hidden" value="<?=$_SERVER['REQUEST_URI']?>" name="origin">
         <input type="search" placeholder="Vyhledat na stránce" name="search" value="<?=$_GET['search'] ?? ''?>">
         <button type="submit">Vyhledat</button>
     </form>
