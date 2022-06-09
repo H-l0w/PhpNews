@@ -19,7 +19,7 @@ if (isset($_POST['name'], $_POST['description'], $_POST['image']))
 }
 require_once 'Model/ImageRepo.php';
 $imageRepo = new ImageRepo($db);
-$images = $imageRepo->getImages();
+$images = $imageRepo->getImages(1);
 ?>
 <!doctype html>
 <html lang="en">

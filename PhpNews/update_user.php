@@ -94,7 +94,7 @@ if (isset($_POST['id'], $_POST['name'],$_POST['surname'], $_POST['username'],
                     </select>
                 <?php endif; ?>
                 <textarea required="required" name="description" id="" cols="30" rows="10" placeholder="Popis uživatele"><?= $user['description']?></textarea>
-                <?php require_once 'image_picker.php'?>
+                <?php require_once 'image_picker.php' ?>
                 <button type="submit">Upravit uživatele</button>
             </form>
         </div>

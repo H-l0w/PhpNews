@@ -74,7 +74,7 @@ if (isset($_POST['name'],$_POST['surname'], $_POST['username'],
                     <?php endforeach; ?>
                 </select>
                 <textarea required="required" name="description" id="" cols="30" rows="10" placeholder="Popis uživatele"></textarea>
-                <?php require_once 'image_picker.php'?>
+                <?php require_once 'image_picker.php' ?>
                 <button type="submit">Přidat uživatele</button>
             </form>
         </div>

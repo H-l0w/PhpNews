@@ -8,7 +8,6 @@
     <title>Přehled článků</title>
     <link rel="stylesheet" href="Style/style.css">
 </head>
-
 <?php
 require_once 'Model/Database.php';
 require_once 'Model/ArticleRepo.php';
@@ -16,46 +15,61 @@ require_once 'Model/ArticleRepo.php';
 $db = new Database();
 
 $repo = new ArticleRepo($db);
-$articles = $repo->getArticles();
+$pagesNumber = $repo->getPagesNumber();
+$actualPage = 1;
+
+if (isset($_GET['page']) && !empty($_GET['page'])){
+    if (!is_numeric($_GET['page']))
+        $actualPage = 1;
+    else if ($_GET['page'] > $pagesNumber)
+        $actualPage = $pagesNumber;
+    else if ($_GET['page'] < 1)
+        $actualPage = 1;
+    else
+        $actualPage = $_GET['page'];
+}
+$articles = $repo->getArticles($actualPage);
 $i = 0;
 ?>
 
 <body>
     <?php require_once 'nav_bar.php'?>
-    <div class="introduction">
-        <div class="inner">
-            <h1>Nejnovější články</h1>
-            <?php require_once 'search_form.php'?>
+    <?php if ($actualPage == 1):?>
+        <div class="introduction">
+            <div class="inner">
+                <h1>Nejnovější články</h1>
+                <?php require_once 'search_form.php'?>
+            </div>
         </div>
-    </div>
-    <div class="latest">
-        <?php if(count($articles) === 0): ?>
-            <h2 class="error">Nejsou publikovány žádné články</h2>
-        <?php endif;?>
-        <?php foreach ($articles as $key => $article): if ($key > 0) break ?>
-            <div class="latest_article">
-                <div class="info">
-                    <a href="article.php?id=<?= $article['id'] ?>"><?= $article['title'] ?></a>
-                    <a style="font-size: 100%" class="continue_reading_latest" href="article.php?id=<?=$article['id']?>">Číst dále</a>
+        <div class="latest">
+            <?php if(count($articles) === 0): ?>
+                <h2 class="error">Nejsou publikovány žádné články</h2>
+            <?php endif;?>
+            <?php foreach ($articles as $key => $article): if ($key > 0) break ?>
+                <div class="latest_article">
+                    <div class="info">
+                        <a href="article.php?id=<?= $article['id'] ?>"><?= $article['title'] ?></a>
+                        <a style="font-size: 100%" class="continue_reading_latest" href="article.php?id=<?=$article['id']?>">Číst dále</a>
+                    </div>
+                    <div class="image">
+                        <a href="article.php?id=<?= $article['id'] ?>">
+                            <img src="<?= $article['path'] ?>" alt="">
+                        </a>
+                    </div>
                 </div>
-                <div class="image">
-                    <a href="article.php?id=<?= $article['id'] ?>">
-                        <img src="<?= $article['path'] ?>" alt="">
-                    </a>
+            <?php endforeach; ?>
+        </div>
+        <div class="four_articles">
+            <?php foreach($articles as $key => $article): if($key < 1) continue; if ($key == 5) break;?>
+                <div class="four_articles_article">
+                    <a href="article.php?id=<?= $article['id'] ?>"><img src="<?= $article['path'] ?>" alt=""></a>
+                    <h4 class="title"><a class="title_link" href="article.php?id=<?= $article['id']?>"><?= $article['title'] ?></a></h4>
                 </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-    <div class="four_articles">
-        <?php foreach($articles as $key => $article): if($key < 1) continue; if ($key == 5) break;?>
-            <div class="four_articles_article">
-                <a href="article.php?id=<?= $article['id'] ?>"><img src="<?= $article['path'] ?>" alt=""></a>
-                <h4 class="title"><a class="title_link" href="article.php?id=<?= $article['id']?>"><?= $article['title'] ?></a></h4>
-            </div>
-        <?php endforeach; ?>
-    </div>
-    <div class="articles">
-        <?php foreach ($articles as $key => $article): if ($key < 5 ) continue ;?>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <div class="articles">
+            <?php foreach ($articles as $article):?>
                 <div class="article">
                     <div class="content">
                         <a class="title_link" href="article.php?id=<?= $article['id']?> ">
@@ -66,7 +80,7 @@ $i = 0;
                             <div class="article_preview">
                                 <?= $article['text']?>
                             </div>
-                                <p>Autor: <a href="author_category.php?id_author=<?= $article['id_author'] ?>"><?= $article['a_name']. ' '. $article['a_surname']?></a></p>
+                            <p>Autor: <a href="author_category.php?id_author=<?= $article['id_author'] ?>"><?= $article['a_name']. ' '. $article['a_surname']?></a></p>
                             <div class="info">
                                 <p>Vydáno: <?=  date("j.n.Y G:i", strtotime($article['date'])); ?></p>
                                 <div class="inner_info">
@@ -77,8 +91,13 @@ $i = 0;
                         </div>
                     </div>
                 </div>
-        <?php endforeach;?>
+            <?php endforeach;?>
+        </div>
+    <?php endif; ?>
+    <div class="pagination">
+        <a href="index.php?page=<?=$actualPage -1?>" <?= $actualPage == 1 ? 'class="invisible"' : "" ?> ><i class="arrow left"></i></a>
+        <p><?=$actualPage .' / '. $pagesNumber?></p>
+        <a href="index.php?page=<?=$actualPage + 1?>" <?= $actualPage == $pagesNumber ? 'class="invisible"' : "" ?>><i class="arrow right"></i></a>
     </div>
-
 </body>
 </html>

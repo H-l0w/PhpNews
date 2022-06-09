@@ -12,6 +12,21 @@ if (!LoginService::IsCreator() && !LoginService::IsAdministrator()){
 $db = new Database();
 $repo = new ImageRepo($db);
 
+$pagesNumber = $repo->getPagesNumber();
+$actualPage = 1;
+
+if (isset($_GET['page']) && !empty($_GET['page'])){
+    if (!is_numeric($_GET['page']))
+        $actualPage = 1;
+    else if ($_GET['page'] > $pagesNumber)
+        $actualPage = $pagesNumber;
+    else if ($_GET['page'] < 1)
+        $actualPage = 1;
+    else
+        $actualPage = $_GET['page'];
+}
+
+
 if (isset($_POST['submit']) && $_POST['submit'] === 'submit'){
     if (empty($_FILES['add_image']['name'])){
         header('Location: administration_gallery.php');
@@ -31,14 +46,14 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit'){
 
 if (isset($_GET['search'])){
     if(empty($_GET['search'])){
-        $images = $repo->getImages();
+        $images = $repo->getImages($actualPage);
     }
     else{
         $images = $repo->findImages('%'.$_GET['search'].'%');
     }
 }
 else{
-    $images = $repo->getImages();
+    $images = $repo->getImages($actualPage, 11);
 }
 ?>
 
@@ -118,6 +133,11 @@ else{
                     </div>
                 </div>
             <?php endforeach; ?>
+        </div>
+        <div class="pagination">
+            <a href="administration_gallery.php?page=<?=$actualPage -1?>" <?= $actualPage == 1 ? 'class="invisible"' : "" ?> ><i class="arrow left"></i></a>
+            <p><?=$actualPage .' / '. $pagesNumber?></p>
+            <a href="administration_gallery.php?page=<?=$actualPage + 1?>" <?= $actualPage == $pagesNumber ? 'class="invisible"' : "" ?>><i class="arrow right"></i></a>
         </div>
     </div>
 </div>

@@ -23,16 +23,30 @@ if (!LoginService::IsAdministrator() && !LoginService::IsCreator()){
 $db = new Database();
 $repo = new ArticleRepo($db);
 
+$pagesNumber = $repo->getPagesNumberAdministration();
+$actualPage = 1;
+
+if (isset($_GET['page']) && !empty($_GET['page'])){
+    if (!is_numeric($_GET['page']))
+        $actualPage = 1;
+    else if ($_GET['page'] > $pagesNumber)
+        $actualPage = $pagesNumber;
+    else if ($_GET['page'] < 1)
+        $actualPage = 1;
+    else
+        $actualPage = $_GET['page'];
+}
+
 if (isset($_GET['search'])){
     if (empty($_GET['search'])){
-        $articles = $repo->getAllArticles();
+        $articles = $repo->getAllArticles($actualPage);
     }
     else{
         $articles = $repo->findArticles('%'.$_GET['search'].'%');
     }
 }
 else{
-    $articles = $repo->getAllArticles();
+    $articles = $repo->getAllArticles($actualPage);
 }
 ?>
 
@@ -53,6 +67,7 @@ else{
                 <th>Datum publikace</th>
                 <th>Titulek</th>
                 <th>Viditelnost</th>
+                <th>Zobrazení</th>
                 <th>Akce</th>
                 <?php foreach ($articles as $key => $article): ?>
                     <tr>
@@ -71,6 +86,9 @@ else{
                             <p><?= $article['visible'] == true ? 'Viditelné' : 'Skryté' ?></p>
                         </td>
                         <td>
+                            <p><?= $article['views'].'x' ?></p>
+                        </td>
+                        <td>
                             <?php if(LoginService::IsAdministrator() || $_SESSION['id'] == $article['id_author']):?>
                                 <div class="action">
                                     <a class="delete" href="delete_article.php?id=<?=$article['id']?>">Smazat</a>
@@ -82,10 +100,17 @@ else{
                 <?php endforeach;?>
             </table>
         </div>
-        <div class="add">
-            <h3>
-                <a href="add_article.php">Přidat článek</a>
-            </h3>
+        <div class="bottom">
+            <div class="pagination">
+                <a href="administration_articles.php?page=<?=$actualPage -1?>" <?= $actualPage == 1 ? 'class="invisible"' : "" ?> ><i class="arrow left"></i></a>
+                <p><?=$actualPage .' / '. $pagesNumber?></p>
+                <a href="administration_articles.php?page=<?=$actualPage + 1?>" <?= $actualPage == $pagesNumber ? 'class="invisible"' : "" ?>><i class="arrow right"></i></a>
+            </div>
+            <div class="add">
+                <h3>
+                    <a href="add_article.php">Přidat článek</a>
+                </h3>
+            </div>
         </div>
     </div>
 </div>

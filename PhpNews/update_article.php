@@ -113,7 +113,7 @@ $date = date("d/m/Y G:i", strtotime($article['date']));
                     Zveřejnit
                     <input name="visible" id="visible"  type="checkbox" value="visible" <?= $article['visible'] == 1 ? 'checked' : '' ?> />
                 </label>
-                <?php require_once 'image_picker.php';?>
+                <?php unset($user); require_once 'image_picker.php';?>
                 <button type="submit">Upravit  článek</button>
             </form>
         </div>

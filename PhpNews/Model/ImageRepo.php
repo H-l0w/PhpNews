@@ -19,8 +19,17 @@ class ImageRepo
         return $this->db->insert($sql, ['name' => $name, 'description' => $description, 'path' => 'Images/'.$name]);
     }
 
-    public function getImages(){
-        $sql = 'SELECT * FROM images';
+    public function getImages($page, $limit = 12){
+        if (!is_numeric($page) || !is_numeric($limit)){
+            header('Location: index.php');
+            die();
+        }
+        $offset = ($page - 1) * 10;
+
+        if ($page === -1)
+            $sql = 'SELECT * FROM images';
+        else
+            $sql = "SELECT * FROM images LIMIT $offset, $limit";
         return $this->db->select($sql);
     }
 
@@ -47,6 +56,34 @@ class ImageRepo
     public function deleteImage($id){
         $sql = 'DELETE FROM images WHERE id = :id';
         $this->db->delete($sql,$id);
+    }
+
+    public function getPagesNumber(){
+        $sql = 'SELECT COUNT(id) as num FROM images';
+        $res = $this->db->selectOne($sql)['num'];
+        return ceil($res / 10);
+    }
+
+    public function getImageForArticle($id){
+        $sql = 'SELECT i.path FROM articles a
+                INNER JOIN images i ON i.id = a.id_image
+                WHERE a.id = :id';
+        return $this->db->selectOne($sql, ['id' => $id])['path'];
+    }
+
+    public function getImageForAuthor($id){
+        $sql = 'SELECT i.path FROM users u
+                INNER JOIN images i ON i.id = u.id_image
+                WHERE u.id = :id';
+
+        return $this->db->selectOne($sql, ['id' => $id])['path'];
+    }
+
+    public function getImageForCategory($id){
+        $sql = 'SELECT i.path FROM categories c
+                INNER JOIN images i ON i.id = c.id_image
+                WHERE c.id = :id';
+        return $this->db->selectOne($sql, ['id' => $id])['path'];
     }
 
     public function addImage($files, $imageNameInFiles, $imageNameToStore, $description){

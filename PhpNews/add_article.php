@@ -86,7 +86,7 @@ $users = $repo->getAuthors();
                 <label for="visible"  style="word-wrap:break-word">
                     <input name="visible" id="visible"  type="checkbox" value="visible" />Zveřejnit
                 </label>
-                <?php require_once 'image_picker.php';?>
+                <?php unset($user); require_once 'image_picker.php';?>
                 <button type="submit">Přidat článek</button>
             </form>
         </div>
