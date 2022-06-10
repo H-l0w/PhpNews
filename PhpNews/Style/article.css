@@ -171,6 +171,10 @@ h2{
     max-width: 100%;
 }
 
+.categories a:hover, .article_info a:hover{
+    transform: scale(1.2);
+}
+
 @media only screen and (max-width: 600px) {
     .comment_section {
         display: block;

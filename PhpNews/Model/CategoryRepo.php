@@ -41,7 +41,7 @@ class CategoryRepo
     }
 
     public function getNumArticlesForCategory($id){
-        $sql = 'SELECT COUNT(0) from category_assigns where id_category = :id';
+        $sql = 'SELECT COUNT(0) AS count from category_assigns where id_category = :id';
         return $this->db->selectOne($sql, ['id' => $id]);
     }
 

@@ -18,7 +18,7 @@ $pagesNumber = $imageRepo->getPagesNumber();
 $actualPage = PageRepo::getActualPage($pagesNumber);
 
 $images = $imageRepo->getImages($actualPage);
-$origin;
+$origin = "";
 $id;
 if (isset($article)){
     $article['path'] = $imageRepo->getImageForArticle($article['id']);

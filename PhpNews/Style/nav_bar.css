@@ -63,6 +63,47 @@ img{
     margin-bottom: 10px;
 }
 
+.pagination{
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 150%;
+}
+
+.pagination p{
+    margin: 0;
+}
+
+.invisible{
+    display: none;
+}
+
+.arrow{
+    width: 10px;
+    height: 10px;
+    border: solid #155dee;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.left{
+    transform: rotate(135deg);
+}
+
+.right{
+    transform: rotate(-45deg);
+}
+
+.right:hover{
+    transform: scale(1.2) rotate(-45deg);
+}
+
+.left:hover{
+    transform:scale(1.2) rotate(135deg);
+}
+
 @media only screen and (max-width: 900px) {
     ul{
         display: flex;

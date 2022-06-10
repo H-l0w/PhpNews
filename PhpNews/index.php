@@ -59,6 +59,7 @@ $i = 0;
             <?php endforeach; ?>
         </div>
     <?php else: ?>
+        
         <div class="articles">
             <?php foreach ($articles as $article):?>
                 <div class="article">

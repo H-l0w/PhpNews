@@ -106,9 +106,9 @@ else{
             <div class="image">
                 <form class="image_add" action="" method="post" enctype="multipart/form-data">
                     <h2 for="">Přidat obrázek</h2>
-                    <input type="text" name="name" placeholder="jméno obrázku">
+                    <input type="text" name="name" placeholder="jméno obrázku" required>
                     <textarea name="description" id="" cols="30" rows="10" placeholder="Popisek obrázku"></textarea>
-                    <input type="file" name="add_image" accept=".png, .jpg, .jpeg" >
+                    <input type="file" name="add_image" accept=".png, .jpg, .jpeg" required>
                     <button name="submit" value="submit" type="submit">Přidat obrázek</button>
                 </form>
             </div>
